@@ -119,8 +119,6 @@ if [ -n "$selected" ]; then
         
         # Run pywal for both types
         wal -i "$original_path" -n -q --saturate 1.0
-        pkill dunst; dunst &
-        bash ~/.config/scripts/reload-waybar.sh
 
         # Use the thumbnail for the notification icon
         #notify-send "Wallpaper Updated" "Theme set to $(basename "$original_path")" -i "$CACHE_DIR/$(basename "${original_path%.*}").png"

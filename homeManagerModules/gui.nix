@@ -17,14 +17,14 @@
     kitty
     xfce.thunar
     xarchiver
-    librewolf
+    cloud-utils
+    #librewolf
     vesktop
     zoom-us
     filezilla
     obsidian
     libreoffice
     prismlauncher
-    gamescope
     pavucontrol
 
     # Desktop Utilities
