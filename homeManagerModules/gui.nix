@@ -14,11 +14,13 @@
     networkmanagerapplet
 
     # GUI Applications
+    vivaldi
     kitty
     xfce.thunar
     xarchiver
     cloud-utils
     #librewolf
+    brave
     vesktop
     zoom-us
     filezilla
