@@ -17,6 +17,8 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    yazi.url = "github:sxyazi/yazi";
   };
 
   outputs = inputs:
