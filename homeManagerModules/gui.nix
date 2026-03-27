@@ -7,10 +7,8 @@
     hyprpaper
     hypridle
     waybar
-    eww
     wofi
     wlogout
-    swaynotificationcenter
     networkmanagerapplet
 
     # GUI Applications
@@ -20,7 +18,6 @@
     xarchiver
     cloud-utils
     #librewolf
-    brave
     vesktop
     zoom-us
     filezilla

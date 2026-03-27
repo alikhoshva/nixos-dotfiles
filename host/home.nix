@@ -10,12 +10,9 @@ let
     hypr = "hypr";
     scripts = "scripts";
     wlogout = "wlogout";
-    dunst = "dunst";
     kitty = "kitty";
     Thunar = "Thunar";
-    eww = "eww";
     wal = "wal";
-    swaync = "swaync";
   };
 in {
   home.username = "aleks";
@@ -24,10 +21,7 @@ in {
   home.stateVersion = "25.11";
   programs.bash = {
     enable = true;
-    shellAliases = {
-      gemini = ''
-        docker run -it --rm --user root --env-file ~/.docker-secrets.env -w /app -v "$(pwd):/app" -v ~/.gemini:/root/.gemini naoyoshinori/gemini-cli:0-node gemini'';
-    };
+    shellAliases = { };
   };
   programs.home-manager.enable = true;
   programs.fzf.enableBashIntegration = true;
