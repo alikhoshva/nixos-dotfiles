@@ -13,6 +13,7 @@ let
     kitty = "kitty";
     Thunar = "Thunar";
     wal = "wal";
+    nvim = "nvim";
   };
 in {
   home.username = "aleks";
