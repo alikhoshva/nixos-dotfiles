@@ -12,6 +12,7 @@
     nix-direnv
     lazydocker
     cachix
+    jdk25_headless
     #devpod-desktop
 
     # Scripting Dependencies

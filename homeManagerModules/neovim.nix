@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ...}:
+{ config, pkgs, lib, ... }:
 
 {
   # Install Neovim and dependencies
@@ -12,6 +12,8 @@
     lua-language-server
     nil # nix language server
     nixpkgs-fmt # nix formatter
+    gcc
+    tree-sitter
 
     # Needed for lazy.nvim
     nodejs
