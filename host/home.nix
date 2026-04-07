@@ -40,20 +40,12 @@ in {
   programs.home-manager.enable = true;
   programs.fzf.enableBashIntegration = true;
 
-  xdg.configFile = (builtins.mapAttrs (name: subpath: {
+  xdg.configFile = builtins.mapAttrs (name: subpath: {
 
     source = create_symlink "${dotfiles}/${subpath}";
 
     recursive = true;
 
-  }) configs)
+  }) configs;
 
-    //
-
-    {
-      "Kvantum/kvantum.kvconfig".text = ''
-        [General]
-        theme=catppuccin-macchiato-blue
-      '';
-    };
 }

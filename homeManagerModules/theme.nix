@@ -1,14 +1,5 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [
-    (catppuccin-kvantum.override {
-      accent = "blue";
-      variant = "macchiato";
-    })
-    libsForQt5.qtstyleplugin-kvantum
-    libsForQt5.qt5ct
-    kdePackages.qt6ct
-    papirus-folders
-  ];
+  home.packages = with pkgs; [ papirus-folders ];
 
   gtk = {
     enable = true;
@@ -23,17 +14,10 @@
         accent = "lavender";
       };
     };
-    gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
-      gtk-cursor-theme-name = "catppuccin-mocha-light-cursors";
-    };
-    gtk4.extraConfig = {
-      Settings = ''
-        				gtk-application-prefer-dark-theme = true;
-                gtk-cursor-theme-name=catppuccin-mocha-light-cursors    		
-      '';
-    };
 
+    # Force legacy GTK apps to use dark theme (dconf handles modern apps)
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+    gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
   };
 
   dconf.settings = {
