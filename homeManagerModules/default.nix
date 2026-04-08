@@ -13,5 +13,6 @@
     ./system.nix
     #./anyrun.nix
     ./noctalia.nix
+    ./nh.nix
   ];
 }
