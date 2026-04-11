@@ -680,14 +680,17 @@
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1775682894,
-        "narHash": "sha256-vsKRK7ERcGDfHYuZhiNGYd+2doUpr2X7b16OvtHRi8s=",
-        "path": "/home/aleks/Projects/Personal/nvim-config",
-        "type": "path"
+        "lastModified": 1775920206,
+        "narHash": "sha256-QpV4MjRpBG0DNyQ0LlgEH1+wwiH5Mgmcd6LYeM6qbRo=",
+        "ref": "refs/heads/main",
+        "rev": "9c4282029e36f4bf20f4d3537af6eaf61a20ed7d",
+        "revCount": 5,
+        "type": "git",
+        "url": "file:///home/aleks/Projects/Personal/nvim-config"
       },
       "original": {
-        "path": "/home/aleks/Projects/Personal/nvim-config",
-        "type": "path"
+        "type": "git",
+        "url": "file:///home/aleks/Projects/Personal/nvim-config"
       }
     },
     "plugins-lze": {

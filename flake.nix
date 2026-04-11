@@ -18,7 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nvim-config = {
-      url = "path:/home/aleks/Projects/Personal/nvim-config";
+      url = "git+file:///home/aleks/Projects/Personal/nvim-config";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     yazi.url = "github:sxyazi/yazi";
