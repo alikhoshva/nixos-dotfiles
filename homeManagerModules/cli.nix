@@ -8,8 +8,6 @@
     fastfetch # or neofetch
     wget
     git
-    direnv
-    nix-direnv
     lazydocker
     cachix
     jdk25_headless
@@ -21,4 +19,9 @@
     fzf
     vlc
   ];
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    enableBashIntegration = true; # This handles the 'hook' automatically
+  };
 }

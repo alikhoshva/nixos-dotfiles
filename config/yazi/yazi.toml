@@ -1,0 +1,9 @@
+[opener]
+edit = [
+	{ run = 'nvim "$@"', block = true, desc = "Neovim" },
+]
+[open]
+rules = [
+	{ mime = "{text,application}/{xml,javascript,x-wine-extension-ini,json}", use = "edit" },
+	{ mime = "text/*", use = "edit" },
+]

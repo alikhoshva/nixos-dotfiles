@@ -13,6 +13,7 @@ let
     kitty = "kitty";
     Thunar = "Thunar";
     wal = "wal";
+    yazi = "yazi";
     #nvim = "nvim";
   };
 in {

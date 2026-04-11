@@ -25,7 +25,7 @@
     libreoffice
     prismlauncher
     pavucontrol
-
+    easyeffects
     # Desktop Utilities
     grim
     slurp
