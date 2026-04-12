@@ -133,7 +133,8 @@
     enable = true;
     drivers = with pkgs; [ cups-filters cups-browsed ];
   };
-
+  services.logind.settings.Login.HandleLidSwitchDocked = "ignore";
+  services.logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
