@@ -31,6 +31,11 @@
     };
   };
 
+  xdg.userDirs = {
+    enable = true;
+    pictures = "${config.home.homeDirectory}/Media/Pictures";
+    videos = "${config.home.homeDirectory}/Media/Videos";
+  };
   xdg.mimeApps.enable = lib.mkDefault true;
   xdg.configFile."mimeapps.list" =
     lib.mkIf config.xdg.mimeApps.enable { force = true; };

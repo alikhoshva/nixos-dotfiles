@@ -10,9 +10,8 @@
     git
     lazydocker
     cachix
-    jdk25_headless
     #devpod-desktop
-
+    jdk17
     # Scripting Dependencies
     jq
     socat

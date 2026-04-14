@@ -121,7 +121,7 @@
 
       general = {
         avatarImage =
-          "/home/aleks/Pictures/Screenshots/2025-10-11-231718_grim.png";
+          "/home/aleks/Media/Pictures/carlotta.png";
         dimmerOpacity = 0.2;
         showScreenCorners = false;
         forceBlackScreenCorners = false;

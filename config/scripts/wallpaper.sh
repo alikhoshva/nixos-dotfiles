@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # MODIFIED: Configuration
-WALLPAPER_DIR="$HOME/Documents/wallpapers"  # Change this to your wallpaper directory
+WALLPAPER_DIR="$HOME/Media/Wallpapers"  # Change this to your wallpaper directory
 CACHE_DIR="$HOME/.cache/wallpaper-selector"
 THUMBNAIL_WIDTH="250"
 THUMBNAIL_HEIGHT="141"
@@ -32,7 +32,7 @@ generate_thumbnail() {
 # Create shuffle icon thumbnail on the fly (no changes here)
 SHUFFLE_ICON="$CACHE_DIR/shuffle_thumbnail.png"
 magick -size "${THUMBNAIL_WIDTH}x${THUMBNAIL_HEIGHT}" xc:#1e1e2e \
-    \( "$HOME/Documents/assets/shuffle.png" -resize "80x80" \) \
+    \( "$HOME/nixos-dotfiles/config/assets/shuffle.png" -resize "80x80" \) \
     -gravity center -composite "$SHUFFLE_ICON"
 
 # Generate thumbnails and create menu items

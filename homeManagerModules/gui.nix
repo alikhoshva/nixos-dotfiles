@@ -23,8 +23,8 @@
     filezilla
     obsidian
     libreoffice
-    prismlauncher
     pavucontrol
+    prismlauncher
     easyeffects
     # Desktop Utilities
     grim
