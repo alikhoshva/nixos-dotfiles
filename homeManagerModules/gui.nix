@@ -24,8 +24,11 @@
     obsidian
     libreoffice
     pavucontrol
-    prismlauncher
     easyeffects
+    (prismlauncher.override { 
+      jdks = [temurin-bin-17 
+    temurin-bin-21]; 
+    })
     # Desktop Utilities
     grim
     slurp

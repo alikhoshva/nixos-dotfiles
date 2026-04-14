@@ -11,7 +11,6 @@
     lazydocker
     cachix
     #devpod-desktop
-    jdk17
     # Scripting Dependencies
     jq
     socat
