@@ -123,6 +123,8 @@
     wireplumber.enable = true;
   };
 
+  security.rtkit.enable = true;
+
   services.avahi = {
     enable = true;
     nssmdns4 = true;
