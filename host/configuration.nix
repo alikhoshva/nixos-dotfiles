@@ -153,10 +153,10 @@
       query = "/proc/acpi/ibm/thermal";
     }];
     levels = [
-      [0  0  50]
-      [4 45  70]
-      [7 65  85]
-      ["level auto" 80 32767] # Max speed
+      [ 0 0 50 ]
+      [ 4 45 70 ]
+      [ 7 65 85 ]
+      [ "level auto" 80 32767 ] # Max speed
     ];
   };
   services.avahi = {
