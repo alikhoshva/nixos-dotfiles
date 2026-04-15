@@ -1,68 +1,50 @@
 #!/usr/bin/env bash
+shopt -s nullglob nocaseglob
 
-WALLPAPER_DIR="$HOME/Media/Wallpapers"
-CACHE_DIR="$HOME/.cache/wallpaper-selector"
-THUMBNAIL_WIDTH="250"
-THUMBNAIL_HEIGHT="141"
+DIR="$HOME/Media/Wallpapers"
+CACHE="$HOME/.cache/wallpaper-selector"
+DIM="250x141"
 
-mkdir -p "$CACHE_DIR"
+mkdir -p "$CACHE"
 
-generate_thumbnail() {
-    local input="$1"
-    local output="$2"
-    magick "$input" -thumbnail "${THUMBNAIL_WIDTH}x${THUMBNAIL_HEIGHT}^" -gravity center -extent "${THUMBNAIL_WIDTH}x${THUMBNAIL_HEIGHT}" "$output"
-}
+SHUFFLE="$CACHE/shuffle.png"
+[[ -f "$SHUFFLE" ]] || magick -size "$DIM" xc:#1e1e2e \
+    \( "$HOME/nixos-dotfiles/config/assets/shuffle.png" -resize "80x80" \) \
+    -gravity center -composite "$SHUFFLE"
 
-SHUFFLE_ICON="$CACHE_DIR/shuffle_thumbnail.png"
-if [[ ! -f "$SHUFFLE_ICON" ]]; then
-    magick -size "${THUMBNAIL_WIDTH}x${THUMBNAIL_HEIGHT}" xc:#1e1e2e \
-        \( "$HOME/nixos-dotfiles/config/assets/shuffle.png" -resize "80x80" \) \
-        -gravity center -composite "$SHUFFLE_ICON"
-fi
-
-generate_menu() {
-    echo -en "img:$SHUFFLE_ICON\x00info:!Random Wallpaper\x1fRANDOM\n"
-    
-    for file in "$WALLPAPER_DIR"/*.{jpg,jpeg,png}; do
-        [[ -f "$file" ]] || continue
-        
-        thumbnail="$CACHE_DIR/$(basename "${file%.*}").png"
-        
-        if [[ ! -f "$thumbnail" ]] || [[ "$file" -nt "$thumbnail" ]]; then
-            generate_thumbnail "$file" "$thumbnail"
-        fi
-        
-        echo -en "img:$thumbnail\x00info:$(basename "$file")\x1f$file\n"
+menu() {
+    echo -en "img:$SHUFFLE\x00info:!Random\x1fRANDOM\n"
+    for f in "$DIR"/*.{jpg,jpeg,png}; do
+        t="$CACHE/$(basename "${f%.*}").png"
+        [[ -f "$t" && "$t" -nt "$f" ]] || magick "$f" -thumbnail "$DIM^" -gravity center -extent "$DIM" "$t"
+        echo -en "img:$t\x00info:$(basename "$f")\x1f$f\n"
     done
 }
 
-selected=$(generate_menu | wofi --show dmenu \
+sel=$(menu | wofi --show dmenu \
+    -c ~/.config/wofi/wallpaper.conf \
+    -s ~/.config/wofi/wallpaper.css \
+    --define "image-size=$DIM" \
     --cache-file /dev/null \
-    --define "image-size=${THUMBNAIL_WIDTH}x${THUMBNAIL_HEIGHT}" \
-    --columns 3 \
-    --allow-images \
-    --insensitive \
     --sort-order=default \
-    --prompt "Select Wallpaper" \
-    --conf ~/.config/wofi/wallpaper.conf \
-    --style ~/.config/wofi/wallpaper.css \
-)
+    --columns 3 --allow-images --insensitive \
+    --prompt "Select Wallpaper")
 
-if [ -n "$selected" ]; then
-    if [[ "$selected" == *"RANDOM"* ]]; then
-        original_path=$(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | shuf -n 1)
-    else
-        thumbnail_filename=$(basename "$selected")
-        base_filename="${thumbnail_filename%.*}"
-        original_path=$(find "$WALLPAPER_DIR" -type f -name "${base_filename}.*" | head -n 1)
-    fi
+[[ -z "$sel" ]] && exit 0
 
-    if [ -n "$original_path" ] && [ -f "$original_path" ]; then
-        awww query || awww-daemon &
-        awww img "$original_path" --transition-type center --transition-fps 60
-        
-        wal -i "$original_path" -n -q --saturate 1.0
-    else
-        notify-send "Wallpaper Script Error" "Could not find original file for: '$selected'"
-    fi
+if [[ "${sel^^}" == *"RANDOM"* ]] || [[ "$sel" == *"shuffle"* ]]; then
+    files=("$DIR"/*.{jpg,jpeg,png})
+    bg="${files[RANDOM % ${#files[@]}]}"
+else
+    base=$(basename "$sel")
+    files=("$DIR"/${base%.*}.*)
+    bg="${files[0]}"
+fi
+
+if [[ -f "$bg" ]]; then
+    awww query || awww-daemon &
+    awww img "$bg" --transition-type center --transition-fps 60
+    wal -i "$bg" -n -q --saturate 1.0
+else
+    notify-send "Error" "Wallpaper missing: $sel"
 fi

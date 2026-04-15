@@ -120,8 +120,7 @@
       };
 
       general = {
-        avatarImage =
-          "/home/aleks/Media/Pictures/carlotta.png";
+        avatarImage = "/home/aleks/Media/Pictures/carlotta.png";
         dimmerOpacity = 0.2;
         showScreenCorners = false;
         forceBlackScreenCorners = false;
@@ -408,7 +407,7 @@
         powerOptions = [
           {
             action = "lock";
-            command = "";
+            command = "hyprlock";
             countdownEnabled = true;
             enabled = true;
             keybind = "1";
