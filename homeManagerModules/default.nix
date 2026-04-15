@@ -14,5 +14,6 @@
     #./anyrun.nix
     ./noctalia.nix
     ./nh.nix
+    ./wallpaper.nix
   ];
 }

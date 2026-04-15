@@ -4,10 +4,9 @@
   home.packages = with pkgs; [
     # Shell & Session
     hyprlock
-    hyprpaper
     hypridle
     waybar
-    wofi
+
     wlogout
     networkmanagerapplet
 
@@ -25,10 +24,7 @@
     libreoffice
     pavucontrol
     easyeffects
-    (prismlauncher.override { 
-      jdks = [temurin-bin-17 
-    temurin-bin-21]; 
-    })
+    (prismlauncher.override { jdks = [ temurin-bin-17 temurin-bin-21 ]; })
     # Desktop Utilities
     grim
     slurp
@@ -37,7 +33,6 @@
     playerctl
     brightnessctl
     nwg-look
-    pywal
-    mpvpaper
+
   ];
 }

@@ -10,7 +10,6 @@
 
     # Media & Archives
     ffmpeg
-    imagemagick
     unzip
     zip
     p7zip

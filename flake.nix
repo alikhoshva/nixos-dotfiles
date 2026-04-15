@@ -8,9 +8,9 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland";
+    #hyprland.url = "github:hyprwm/Hyprland?submodules=1";
     viu.url = "github:Benexl/viu";
-    swww.url = "github:LGFae/swww";
+    #swww.url = "github:LGFae/swww";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     noctalia = {
