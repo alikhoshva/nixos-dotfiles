@@ -215,7 +215,7 @@
       wallpaper = {
         enabled = false;
         overviewEnabled = false;
-        directory = "/home/aleks/Pictures/Wallpapers";
+        directory = "/home/aleks/Media/Wallpapers";
         monitorDirectories = [ ];
         enableMultiMonitorDirectories = false;
         showHiddenFiles = false;
@@ -513,7 +513,7 @@
 
       colorSchemes = {
         useWallpaperColors = true;
-        predefinedScheme = "Monochrome";
+        predefinedScheme = "";
         darkMode = true;
         schedulingMode = "off";
         manualSunrise = "06:30";
