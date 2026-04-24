@@ -33,6 +33,6 @@
     playerctl
     brightnessctl
     nwg-look
-
+    mpv
   ];
 }

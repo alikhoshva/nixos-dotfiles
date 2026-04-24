@@ -1,7 +1,7 @@
 {
   imports = [
     ./hyprland.nix
-    #./steam.nix
+    ./steam.nix
     ./thunar.nix
     ./docker.nix
     ./greeter.nix

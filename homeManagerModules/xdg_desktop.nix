@@ -23,10 +23,10 @@
         [ "text/plain" "text/markdown" ]; # Associate it with text files
     };
 
-    viu-media = {
-      name = "Viu Media";
-      comment = "Launch the Viu media application";
-      exec = "kitty --hold viu";
+    ani-media = {
+      name = "Ani Media";
+      comment = "Launch the ani-cli media application";
+      exec = "kitty --hold ani-cli";
       terminal = false;
     };
   };
