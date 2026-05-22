@@ -18,6 +18,7 @@ require("conf-lua.look")
 require("conf-lua.windowrules")
 require("conf-lua.binds")
 require("conf-lua.perms")
+require("conf-lua.animations")
 
 
 

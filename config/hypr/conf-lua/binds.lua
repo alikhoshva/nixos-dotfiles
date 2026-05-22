@@ -78,7 +78,14 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Monitor Management
-hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("hyprctl --batch \"keyword monitor eDP-1,disable; keyword monitor HDMI-A-1,3840x2160@120,0x0,1.5\""))
-hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("hyprctl --batch \"keyword monitor eDP-1,disable; keyword monitor HDMI-A-1,1920x1080@120,0x0,1.0\""))
-hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd("hyprctl --batch \"keyword monitor HDMI-A-1,disable; keyword monitor eDP-1,1920x1200@60,0x0,1.5\""))
-hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("hyprctl --batch \"keyword monitor eDP-1,1920x1200@60,0x0,1; keyword monitor HDMI-A-1,3840x2160@120,1920x0,1.5\""))
+-- External 4K. Disable laptop FIRST.
+hl.bind(mainMod .. " + O", hl.dsp.exec_cmd([[hyprctl eval 'hl.monitor({ output = "eDP-1", disabled = true }) hl.monitor({ output = "HDMI-A-1", mode = "3840x2160@120", position = "0x0", scale = 1.5, disabled = false })']]))
+
+-- External 1080p. Disable laptop FIRST.
+hl.bind(mainMod .. " + G", hl.dsp.exec_cmd([[hyprctl eval 'hl.monitor({ output = "eDP-1", disabled = true }) hl.monitor({ output = "HDMI-A-1", mode = "1920x1080@120", position = "0x0", scale = 1.0, disabled = false })']]))
+
+-- Laptop only. Disable external FIRST.
+hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd([[hyprctl eval 'hl.monitor({ output = "HDMI-A-1", disabled = true }) hl.monitor({ output = "eDP-1", mode = "1920x1200@60", position = "0x0", scale = 1.5, disabled = false })']]))
+
+-- Reset both side-by-side (no overlap)
+hl.bind(mainMod .. " + I", hl.dsp.exec_cmd([[hyprctl eval 'hl.monitor({ output = "eDP-1", mode = "1920x1200@60", position = "0x0", scale = 1, disabled = false }) hl.monitor({ output = "HDMI-A-1", mode = "3840x2160@120", position = "1920x0", scale = 1.5, disabled = false })']]))

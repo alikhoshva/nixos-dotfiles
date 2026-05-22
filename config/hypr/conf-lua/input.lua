@@ -21,7 +21,9 @@ hl.config({
 })
 
 hl.gesture({
-    workspace_swipe = true,
+    fingers = 3,
+    direction = "horizontal",
+    action = "workspace"
 })
 
 -- Example per-device config
