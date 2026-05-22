@@ -13,6 +13,7 @@
     # GUI Applications
     vivaldi
     kitty
+    #google-chrome
     xfce.thunar
     xarchiver
     cloud-utils
