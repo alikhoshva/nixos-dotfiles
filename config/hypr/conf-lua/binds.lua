@@ -6,7 +6,7 @@
 local terminal    = "kitty"
 local fileManager = "thunar"
 local menu        = 'bash -c "pkill wofi; wofi --show drun --conf ~/.config/wofi/config.conf --style ~/.config/wofi/style.css"'
-local browser     = "zen-twilight"
+local browser     = "vivaldi"
 local editor      = "code"
 
 ---------------------
@@ -52,10 +52,10 @@ hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
 
 -- Swap window
-hl.bind(mainMod .. " + SHIFT + H", hl.dsp.exec_cmd("hyprctl dispatch swapwindow l"))
-hl.bind(mainMod .. " + SHIFT + J", hl.dsp.exec_cmd("hyprctl dispatch swapwindow d"))
-hl.bind(mainMod .. " + SHIFT + K", hl.dsp.exec_cmd("hyprctl dispatch swapwindow u"))
-hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("hyprctl dispatch swapwindow r"))
+hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.swap({ direction = "l" }))
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.swap({ direction = "d" }))
+hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.swap({ direction = "u" }))
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.swap({ direction = "r" }))
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]

@@ -33,6 +33,8 @@
 
   # Set your time zone.
   time.timeZone = "America/New_York";
+  networking.timeServers =
+    [ "time.cloudflare.com" "time.google.com" "0.us.pool.ntp.org" ];
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
