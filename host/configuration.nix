@@ -33,8 +33,27 @@
 
   # Set your time zone.
   time.timeZone = "America/New_York";
-  networking.timeServers =
-    [ "time.cloudflare.com" "time.google.com" "0.us.pool.ntp.org" ];
+
+  networking = {
+    # 1. Do NOT hardcode nameservers here anymore. 
+    # Let your home router hand out your AdGuard IP via DHCP naturally.
+    nameservers = [ ];
+    timeServers =
+      [ "time.cloudflare.com" "time.google.com" "0.us.pool.ntp.org" ];
+
+    # 2. Tell NetworkManager (or your network backend) to pass DNS control to resolved
+    networkmanager.dns = "systemd-resolved";
+  };
+
+  services.resolved = {
+    enable = true;
+
+    # 3. Define your global "away from home" backups.
+    fallbackDns = [ "1.1.1.1" "8.8.8.8" ];
+
+    # 4. FIXED: Use "opportunistic" instead of "true" to survive corporate firewalls
+    dnsovertls = "opportunistic";
+  };
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";

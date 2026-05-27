@@ -15,5 +15,6 @@
     ./noctalia.nix
     ./nh.nix
     ./wallpaper.nix
+    ./latest.nix
   ];
 }
