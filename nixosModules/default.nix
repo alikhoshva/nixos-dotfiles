@@ -7,5 +7,6 @@
     ./greeter.nix
     ./tlp.nix
     ./cachix.nix
+    ./networking.nix
   ];
 }
