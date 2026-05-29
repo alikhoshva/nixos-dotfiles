@@ -1,5 +1,6 @@
 { pkgs, ... }: {
-  environment.systemPackages = with pkgs; [ xfce.xfconf  ];
+  programs.thunar.enable = true;
+
 
   programs.thunar.plugins = with pkgs.xfce; [
     thunar-archive-plugin

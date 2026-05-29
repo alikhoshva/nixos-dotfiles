@@ -15,7 +15,7 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "nodev";
   boot.loader.grub.useOSProber = true;
-  boot.loader.grub.memtest86.enable = true;
+  # boot.loader.grub.memtest86.enable = true;
   boot.loader.grub.efiSupport = true;
   boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -126,13 +126,25 @@
     };
   };
 
-  # additional fix for very bad devices or VM. 
   services.pipewire.wireplumber.extraConfig = {
     "99-crackling-fix" = {
-      "api.alsa.period-size" = 1024;
-      "api.alsa.headroom" = 8192;
+      "monitor.alsa.rules" = [
+        {
+          matches = [
+            { "node.name" = "~alsa_input.*"; }
+            { "node.name" = "~alsa_output.*"; }
+          ];
+          actions = {
+            update-props = {
+              "api.alsa.period-size" = 1024;
+              "api.alsa.headroom" = 8192;
+            };
+          };
+        }
+      ];
     };
   };
+
 
   boot.extraModprobeConfig = ''
     options thinkpad_acpi fan_control=1

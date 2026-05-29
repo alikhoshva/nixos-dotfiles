@@ -249,11 +249,11 @@
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1779114380,
-        "narHash": "sha256-HlhWBX5aQbPlsOrO73ekyQT+9fPhupb90nsKmzQ0E1M=",
+        "lastModified": 1779994404,
+        "narHash": "sha256-HkrmiRf/3jV3sNgmoDbpPSO2jRMaUxKI2Q3AWFEvRAM=",
         "ref": "refs/heads/main",
-        "rev": "2f9272c338a0a07745ca77412f3a42359d36d403",
-        "revCount": 16,
+        "rev": "a9a2b3eb094fe0f23972fd9ed010fd632e881554",
+        "revCount": 18,
         "type": "git",
         "url": "file:///home/aleks/Projects/Personal/nvim-config"
       },
