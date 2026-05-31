@@ -1,7 +1,11 @@
 { pkgs, pkgs-unstable, ... }:
 
 {
-  home.packages = with pkgs; [ nixfmt nil ];
+  home.packages = with pkgs; [
+    nixfmt
+    nixd
+    ruff
+  ];
 
   programs.vscode = {
     enable = true;
@@ -19,7 +23,7 @@
         # --- General Productivity ---
         usernamehw.errorlens
         christian-kohler.path-intellisense
-        ms-azuretools.vscode-containers
+        ms-azuretools.vscode-docker
         ms-toolsai.jupyter
         ms-python.python
         ms-vscode.cpptools
@@ -28,10 +32,10 @@
         google.colab
         asvetliakov.vscode-neovim
 
-        arrterian.nix-env-selector
+        #arrterian.nix-env-selector
         mikestead.dotenv
         mkhl.direnv
-        ms-python.black-formatter
+        charliermarsh.ruff
         ms-python.vscode-pylance
       ];
 
@@ -63,14 +67,12 @@
         {
           key = "tab";
           command = "selectNextSuggestion";
-          when =
-            "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus";
+          when = "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus";
         }
         {
           key = "shift+tab";
           command = "selectPrevSuggestion";
-          when =
-            "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus";
+          when = "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus";
         }
         {
           key = "ctrl+y";
@@ -84,13 +86,14 @@
         "workbench.sideBar.location" = "right";
         "git.confirmSync" = false;
         "update.mode" = "none";
-        "python.analysis.extraPaths" = [ ".venv\\Lib\\site-packages" ];
         "editor.inlineSuggest.enabled" = false;
         "files.insertFinalNewline" = true;
 
+        # --- Python Integration ---
+        "ruff.path" = [ "${pkgs.ruff}/bin/ruff" ];
+
         # --- Neovim Flake Integration ---
-        "vscode-neovim.neovimExecutablePaths.linux" =
-          "/etc/profiles/per-user/aleks/bin/nvim";
+        "vscode-neovim.neovimExecutablePaths.linux" = "/etc/profiles/per-user/aleks/bin/nvim";
         "vscode-neovim.neovimInitVimPaths.linux" = "";
 
         # --- Neovim-like UI and Visuals ---
@@ -113,9 +116,13 @@
 
         # --- Nix Language Server Settings ---
         "nix.enableLanguageServer" = true;
-        "nix.serverPath" = "nil";
+        "nix.serverPath" = "nixd";
         "nix.serverSettings" = {
-          "nil" = { "formatting" = { "command" = [ "nixfmt" ]; }; };
+          "nixd" = {
+            "formatting" = {
+              "command" = [ "nixfmt" ];
+            };
+          };
         };
 
         # --- Language-Specific Settings ---
@@ -131,7 +138,10 @@
           "editor.defaultFormatter" = "esbenp.prettier-vscode";
           "editor.formatOnSave" = true;
         };
-        "[nix]" = { "editor.formatOnSave" = true; };
+        "[nix]" = {
+          "editor.defaultFormatter" = "jnoortheen.nix-ide";
+          "editor.formatOnSave" = true;
+        };
       };
     };
   };
