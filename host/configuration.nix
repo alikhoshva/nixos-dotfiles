@@ -128,23 +128,20 @@
 
   services.pipewire.wireplumber.extraConfig = {
     "99-crackling-fix" = {
-      "monitor.alsa.rules" = [
-        {
-          matches = [
-            { "node.name" = "~alsa_input.*"; }
-            { "node.name" = "~alsa_output.*"; }
-          ];
-          actions = {
-            update-props = {
-              "api.alsa.period-size" = 1024;
-              "api.alsa.headroom" = 8192;
-            };
+      "monitor.alsa.rules" = [{
+        matches = [
+          { "node.name" = "~alsa_input.*"; }
+          { "node.name" = "~alsa_output.*"; }
+        ];
+        actions = {
+          update-props = {
+            "api.alsa.period-size" = 1024;
+            "api.alsa.headroom" = 8192;
           };
-        }
-      ];
+        };
+      }];
     };
   };
-
 
   boot.extraModprobeConfig = ''
     options thinkpad_acpi fan_control=1
@@ -180,5 +177,5 @@
 
   environment.systemPackages = with pkgs; [ tuigreet ];
 
-  system.stateVersion = "25.11"; # Did you read the comment?
+  system.stateVersion = "26.05"; # Did you read the comment?
 }

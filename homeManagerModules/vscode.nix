@@ -1,7 +1,7 @@
 { pkgs, pkgs-unstable, ... }:
 
 {
-  home.packages = with pkgs; [ nixfmt-classic nil ];
+  home.packages = with pkgs; [ nixfmt nil ];
 
   programs.vscode = {
     enable = true;
@@ -30,6 +30,7 @@
 
         arrterian.nix-env-selector
         mikestead.dotenv
+        mkhl.direnv
         ms-python.black-formatter
         ms-python.vscode-pylance
       ];

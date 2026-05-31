@@ -22,10 +22,13 @@
   services.resolved = {
     enable = true;
 
-    # Global fallback DNS when away from the home network
-    fallbackDns = [ "1.1.1.1" "8.8.8.8" ];
-
-    # 'opportunistic' prevents connection drops on restrictive public/corporate networks
-    dnsovertls = "opportunistic";
+    settings = {
+      Resolve = {
+        # Global fallback DNS when away from the home network
+        FallbackDNS = [ "1.1.1.1" "8.8.8.8" ];
+        # 'opportunistic' prevents connection drops on restrictive public/corporate networks
+        DNSOverTLS = "opportunistic";
+      };
+    };
   };
 }

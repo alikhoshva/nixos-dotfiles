@@ -33,6 +33,7 @@
 
   xdg.userDirs = {
     enable = true;
+    setSessionVariables = true;
     pictures = "${config.home.homeDirectory}/Media/Pictures";
     videos = "${config.home.homeDirectory}/Media/Videos";
   };
