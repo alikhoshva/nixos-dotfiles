@@ -10,6 +10,7 @@
   programs.vscode = {
     enable = true;
     package = pkgs-unstable.vscode;
+    mutableExtensionsDir = false;
     profiles.default = {
       extensions = with pkgs-unstable.vscode-extensions; [
         # --- Nix Essentials ---

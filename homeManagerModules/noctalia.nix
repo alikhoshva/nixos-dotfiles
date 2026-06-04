@@ -1,10 +1,11 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
   imports = [ inputs.noctalia.homeModules.default ];
 
   programs.noctalia-shell = {
     enable = true;
     settings = {
-      settingsVersion = 59; # Updated version
+      settingsVersion = 59;
 
       bar = {
         barType = "floating";
@@ -15,14 +16,14 @@
         showCapsule = true;
         capsuleOpacity = 0.5;
         capsuleColorKey = "none";
-        widgetSpacing = 6;
-        contentPadding = 2;
+        widgetSpacing = 5;
+        contentPadding = 0;
         fontScale = 1;
         enableExclusionZoneInset = true;
         backgroundOpacity = 0;
         useSeparateOpacity = true;
         marginVertical = 5;
-        marginHorizontal = 10;
+        marginHorizontal = 5;
         frameThickness = 8;
         frameRadius = 12;
         outerCorners = true;
@@ -57,27 +58,29 @@
               titleWidth = 120;
             }
           ];
-          center = [{
-            characterCount = 1;
-            colorizeIcons = false;
-            emptyColor = "secondary";
-            enableScrollWheel = true;
-            focusedColor = "primary";
-            followFocusedScreen = true;
-            fontWeight = "bold";
-            groupedBorderOpacity = 1;
-            hideUnoccupied = false;
-            iconScale = 0.8;
-            id = "Workspace";
-            labelMode = "name";
-            occupiedColor = "secondary";
-            pillSize = 0.6;
-            showApplications = false;
-            showApplicationsHover = false;
-            showBadge = true;
-            showLabelsOnlyWhenOccupied = false;
-            unfocusedIconsOpacity = 1;
-          }];
+          center = [
+            {
+              characterCount = 1;
+              colorizeIcons = false;
+              emptyColor = "secondary";
+              enableScrollWheel = true;
+              focusedColor = "primary";
+              followFocusedScreen = true;
+              fontWeight = "bold";
+              groupedBorderOpacity = 1;
+              hideUnoccupied = false;
+              iconScale = 0.8;
+              id = "Workspace";
+              labelMode = "name";
+              occupiedColor = "secondary";
+              pillSize = 0.6;
+              showApplications = false;
+              showApplicationsHover = false;
+              showBadge = true;
+              showLabelsOnlyWhenOccupied = false;
+              unfocusedIconsOpacity = 1;
+            }
+          ];
           right = [
             {
               displayMode = "onhover";
@@ -115,7 +118,11 @@
         reverseScroll = false;
         mouseWheelWrap = true;
         middleClickAction = "none";
+        middleClickFollowMouse = false;
+        middleClickCommand = "";
         rightClickAction = "controlCenter";
+        rightClickFollowMouse = true;
+        rightClickCommand = "";
         screenOverrides = [ ];
       };
 
@@ -153,16 +160,23 @@
         clockStyle = "custom";
         clockFormat = "hh\\nmm";
         passwordChars = false;
+        lockScreenMonitors = [ ];
+        lockScreenBlur = 0;
+        lockScreenTint = 0;
         keybinds = {
           keyUp = [ "Up" ];
           keyDown = [ "Down" ];
           keyLeft = [ "Left" ];
           keyRight = [ "Right" ];
-          keyEnter = [ "Return" "Enter" ];
+          keyEnter = [
+            "Return"
+            "Enter"
+          ];
           keyEscape = [ "Esc" ];
           keyRemove = [ "Del" ];
         };
         reverseScroll = false;
+        smoothScrollEnabled = true;
       };
 
       ui = {
@@ -184,6 +198,7 @@
         name = "Holmdel, NJ";
         weatherEnabled = true;
         weatherShowEffects = true;
+        weatherTaliaMascotAlways = false;
         useFahrenheit = false;
         use12hourFormat = true;
         showWeekNumberInCalendar = false;
@@ -193,6 +208,7 @@
         firstDayOfWeek = -1;
         hideWeatherTimezone = false;
         hideWeatherCityName = false;
+        autoLocate = false;
       };
 
       calendar = {
@@ -221,6 +237,7 @@
         showHiddenFiles = false;
         viewMode = "single";
         setWallpaperOnAllMonitors = true;
+        linkLightAndDarkWallpapers = true;
         fillMode = "crop";
         fillColor = "#000000";
         useSolidColor = false;
@@ -229,8 +246,14 @@
         wallpaperChangeMode = "random";
         randomIntervalSec = 300;
         transitionDuration = 1500;
-        transitionType =
-          [ "fade" "disc" "stripes" "wipe" "pixelate" "honeycomb" ];
+        transitionType = [
+          "fade"
+          "disc"
+          "stripes"
+          "wipe"
+          "pixelate"
+          "honeycomb"
+        ];
         skipStartupTransition = false;
         transitionEdgeSmoothness = 5.0e-2;
         panelPosition = "follow_bar";
@@ -260,10 +283,8 @@
         clipboardWrapText = true;
         enableClipboardSmartIcons = true;
         enableClipboardChips = true;
-        clipboardWatchTextCommand =
-          "wl-paste --type text --watch cliphist store";
-        clipboardWatchImageCommand =
-          "wl-paste --type image --watch cliphist store";
+        clipboardWatchTextCommand = "wl-paste --type text --watch cliphist store";
+        clipboardWatchImageCommand = "wl-paste --type image --watch cliphist store";
         position = "center";
         pinnedApps = [ ];
         sortByMostUsed = true;
@@ -287,7 +308,10 @@
         position = "top_right";
         diskPath = "/";
         shortcuts = {
-          left = [ { id = "Network"; } { id = "Bluetooth"; } ];
+          left = [
+            { id = "Network"; }
+            { id = "Bluetooth"; }
+          ];
           right = [
             { id = "Notifications"; }
             { id = "KeepAwake"; }
@@ -343,8 +367,7 @@
         useCustomColors = false;
         warningColor = "";
         criticalColor = "";
-        externalMonitor =
-          "resources || missioncenter || jdsystemmonitor || corestats || system-monitoring-center || gnome-system-monitor || plasma-systemmonitor || mate-system-monitor || ukui-system-monitor || deepin-system-monitor || pantheon-system-monitor";
+        externalMonitor = "resources || missioncenter || jdsystemmonitor || corestats || system-monitoring-center || gnome-system-monitor || plasma-systemmonitor || mate-system-monitor || ukui-system-monitor || deepin-system-monitor || pantheon-system-monitor";
       };
 
       noctaliaPerformance = {
@@ -385,7 +408,6 @@
       };
 
       network = {
-        airplaneModeEnabled = false;
         bluetoothRssiPollingEnabled = false;
         bluetoothRssiPollIntervalMs = 10000;
         networkPanelView = "wifi";
@@ -488,7 +510,11 @@
         autoHideMs = 2000;
         overlayLayer = true;
         backgroundOpacity = 1;
-        enabledTypes = [ 0 1 2 ];
+        enabledTypes = [
+          0
+          1
+          2
+        ];
         monitors = [ ];
       };
 
@@ -520,6 +546,7 @@
         manualSunset = "18:30";
         generationMethod = "tonal-spot";
         monitorForColors = "";
+        syncGsettings = true;
       };
 
       templates = {
@@ -548,6 +575,11 @@
         startup = "";
         session = "";
         colorGeneration = "";
+      };
+
+      plugins = {
+        autoUpdate = false;
+        notifyUpdates = true;
       };
 
       idle = {
