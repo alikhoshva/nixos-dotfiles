@@ -6,8 +6,6 @@
 
 {
   imports = [ # Include the results of the hardware scan.
-    inputs.home-manager.nixosModules.home-manager
-    ./home-manager.nix
     ./hardware-configuration.nix
   ];
 
@@ -79,7 +77,6 @@
     isNormalUser = true;
     description = "Aleks Likhoshva";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ ];
   };
 
   # Allow unfree packages

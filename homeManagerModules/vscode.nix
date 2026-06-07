@@ -1,4 +1,9 @@
-{ pkgs, pkgs-unstable, ... }:
+{
+  pkgs,
+  pkgs-unstable,
+  inputs,
+  ...
+}:
 
 {
   home.packages = with pkgs; [
@@ -99,7 +104,9 @@
         "ruff.path" = [ "${pkgs.ruff}/bin/ruff" ];
 
         # --- Neovim Flake Integration ---
-        "vscode-neovim.neovimExecutablePaths.linux" = "/etc/profiles/per-user/aleks/bin/nvim";
+        "vscode-neovim.neovimExecutablePaths.linux" = "${
+          inputs.nvim-config.packages.${pkgs.stdenv.hostPlatform.system}.default
+        }/bin/nvim";
         "vscode-neovim.neovimInitVimPaths.linux" = "";
 
         # --- Neovim-like UI and Visuals ---

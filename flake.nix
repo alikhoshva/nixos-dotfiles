@@ -44,6 +44,21 @@
           modules = [ ./host/configuration.nix ./nixosModules ];
         };
       };
+      
+      homeConfigurations = {
+        aleks = inputs.home-manager.lib.homeManagerConfiguration {
+          pkgs = import inputs.nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+          extraSpecialArgs = {
+            inherit inputs;
+            inherit pkgs-unstable;
+          };
+          modules = [ ./host/home.nix ];
+        };
+      };
+
       homeManagerModules.default = import ./homeManagerModules;
     };
 }
