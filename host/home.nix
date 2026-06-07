@@ -43,6 +43,10 @@ in {
   programs.home-manager.enable = true;
   programs.fzf.enableBashIntegration = true;
 
+  manual.manpages.enable = false;
+  manual.html.enable = false;
+  manual.json.enable = false;
+
   xdg.configFile = builtins.mapAttrs (name: subpath: {
 
     source = create_symlink "${dotfiles}/${subpath}";

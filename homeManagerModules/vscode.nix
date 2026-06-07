@@ -83,6 +83,11 @@
       ];
 
       userSettings = {
+        "window.titleBarStyle" = "native";
+        "window.menuBarVisibility" = "toggle";
+        "window.menuStyle" = "native";
+        "window.customTitleBarVisibility" = "never";
+        "workbench.layoutControl.enabled" = false;
         # --- General Settings ---
         "workbench.sideBar.location" = "right";
         "git.confirmSync" = false;

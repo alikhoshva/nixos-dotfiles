@@ -22,6 +22,9 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  documentation.nixos.enable = false;
+  documentation.man.cache.enable = false;
+
   # Set your time zone.
   time.timeZone = "America/New_York";
 
