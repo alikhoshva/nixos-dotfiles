@@ -34,7 +34,7 @@
         ms-python.python
         ms-vscode.cpptools
         ms-vscode-remote.remote-containers
-        Google.gemini-cli-vscode-ide-companion
+        #Google.gemini-cli-vscode-ide-companion
         google.colab
         asvetliakov.vscode-neovim
 
@@ -88,9 +88,10 @@
       ];
 
       userSettings = {
-        "window.titleBarStyle" = "native";
-        "window.menuBarVisibility" = "toggle";
-        "window.menuStyle" = "native";
+        "window.titleBarStyle" = "custom";
+        "window.menuBarVisibility" = "top";
+        "window.menuStyle" = "custom";
+        "window.dialogStyle" = "custom";
         "window.customTitleBarVisibility" = "never";
         "workbench.layoutControl.enabled" = false;
         # --- General Settings ---

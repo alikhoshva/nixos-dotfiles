@@ -1,4 +1,9 @@
 { pkgs, ... }: {
+  programs.captive-browser = {
+    enable = true;
+    interface = "wlp1s0";
+  };
+
   networking = {
     hostName = "nixos";
 

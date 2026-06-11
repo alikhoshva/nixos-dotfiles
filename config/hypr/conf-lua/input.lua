@@ -34,6 +34,6 @@ hl.device({
 })
 
 hl.device({
-    name        = "razer-razer-deathadder-v2",
+    name        = "razer-razer-deathadder-v2-1",
     sensitivity = -1,
 })
