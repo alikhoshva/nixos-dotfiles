@@ -2,10 +2,17 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, pkgs-unstable, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  pkgs-unstable,
+  ...
+}:
 
 {
-  imports = [ # Include the results of the hardware scan.
+  imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
@@ -18,7 +25,10 @@
   boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   documentation.nixos.enable = false;
   documentation.man.cache.enable = false;
@@ -76,7 +86,10 @@
   users.users.aleks = {
     isNormalUser = true;
     description = "Aleks Likhoshva";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
   };
 
   # Allow unfree packages
@@ -85,10 +98,12 @@
   boot.kernelParams = [ "zswap.enabled=1" ];
 
   # This creates a low-priority, "last resort" swap file on your disk.
-  swapDevices = [{
-    device = "/swapfile"; # Location of the file
-    size = 8192; # Size in MiB (e.g., 8192 = 8GiB)
-  }];
+  swapDevices = [
+    {
+      device = "/swapfile"; # Location of the file
+      size = 8192; # Size in MiB (e.g., 8192 = 8GiB)
+    }
+  ];
 
   services.upower.enable = true;
 
@@ -128,18 +143,20 @@
 
   services.pipewire.wireplumber.extraConfig = {
     "99-crackling-fix" = {
-      "monitor.alsa.rules" = [{
-        matches = [
-          { "node.name" = "~alsa_input.*"; }
-          { "node.name" = "~alsa_output.*"; }
-        ];
-        actions = {
-          update-props = {
-            "api.alsa.period-size" = 1024;
-            "api.alsa.headroom" = 8192;
+      "monitor.alsa.rules" = [
+        {
+          matches = [
+            { "node.name" = "~alsa_input.*"; }
+            { "node.name" = "~alsa_output.*"; }
+          ];
+          actions = {
+            update-props = {
+              "api.alsa.period-size" = 1024;
+              "api.alsa.headroom" = 8192;
+            };
           };
-        };
-      }];
+        }
+      ];
     };
   };
 
@@ -149,15 +166,33 @@
 
   services.thinkfan = {
     enable = true;
-    sensors = [{
-      type = "tpacpi";
-      query = "/proc/acpi/ibm/thermal";
-    }];
+    sensors = [
+      {
+        type = "tpacpi";
+        query = "/proc/acpi/ibm/thermal";
+      }
+    ];
     levels = [
-      [ 0 0 50 ]
-      [ 4 45 70 ]
-      [ 7 65 85 ]
-      [ "level auto" 80 32767 ] # Max speed
+      [
+        0
+        0
+        50
+      ]
+      [
+        4
+        45
+        70
+      ]
+      [
+        7
+        65
+        85
+      ]
+      [
+        "level auto"
+        80
+        32767
+      ] # Max speed
     ];
   };
   services.avahi = {
@@ -168,10 +203,13 @@
 
   services.printing = {
     enable = true;
-    drivers = with pkgs; [ cups-filters cups-browsed ];
+    drivers = with pkgs; [
+      cups-filters
+      cups-browsed
+    ];
   };
   services.logind.settings.Login.HandleLidSwitchDocked = "ignore";
-  services.logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
+  #services.logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 

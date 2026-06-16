@@ -14,6 +14,7 @@ let
     Thunar = "Thunar";
     wal = "wal";
     yazi = "yazi";
+    starship = "starship";
     #nvim = "nvim";
   };
 in {
@@ -27,6 +28,11 @@ in {
   ];
   programs.git.enable = true;
   home.stateVersion = "25.11";
+  
+  home.sessionVariables = {
+    STARSHIP_CONFIG = lib.mkForce "$HOME/.config/starship/starship.toml";
+  };
+
   programs.bash = {
     enable = true;
     shellAliases = {

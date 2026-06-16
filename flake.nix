@@ -15,7 +15,7 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
+      url = "github:noctalia-dev/noctalia/legacy-v4";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nvim-config = {
@@ -25,7 +25,8 @@
     #yazi.url = "github:sxyazi/yazi";
   };
 
-  outputs = inputs:
+  outputs =
+    inputs:
     let
       system = "x86_64-linux";
       lib = inputs.nixpkgs.lib;
@@ -33,7 +34,8 @@
         inherit system;
         config.allowUnfree = true;
       };
-    in {
+    in
+    {
       nixosConfigurations = {
         nixos = lib.nixosSystem {
           inherit system;
@@ -41,10 +43,13 @@
             inherit inputs;
             inherit pkgs-unstable;
           };
-          modules = [ ./host/configuration.nix ./nixosModules ];
+          modules = [
+            ./host/configuration.nix
+            ./nixosModules
+          ];
         };
       };
-      
+
       homeConfigurations = {
         aleks = inputs.home-manager.lib.homeManagerConfiguration {
           pkgs = import inputs.nixpkgs {
