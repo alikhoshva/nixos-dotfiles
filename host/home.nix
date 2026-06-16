@@ -15,7 +15,6 @@ let
     wal = "wal";
     yazi = "yazi";
     starship = "starship";
-    #nvim = "nvim";
   };
 in {
   home.username = "aleks";
