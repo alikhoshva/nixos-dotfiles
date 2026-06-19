@@ -10,15 +10,15 @@
 -- require("myColors")
 
 
-require("conf-lua.monitor")
-require("conf-lua.enviroments")
-require("conf-lua.autostart")
-require("conf-lua.input")
-require("conf-lua.look")
-require("conf-lua.windowrules")
-require("conf-lua.binds")
-require("conf-lua.perms")
-require("conf-lua.animations")
+require("conf.monitor")
+require("conf.enviroments")
+require("conf.autostart")
+require("conf.input")
+require("conf.look")
+require("conf.windowrules")
+require("conf.binds")
+require("conf.perms")
+require("conf.animations")
 
 
 

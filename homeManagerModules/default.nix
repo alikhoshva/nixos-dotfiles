@@ -14,5 +14,6 @@
     ./nh.nix
     ./wallpaper.nix
     ./latest.nix
+    ./walker.nix
   ];
 }

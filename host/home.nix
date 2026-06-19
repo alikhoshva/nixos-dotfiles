@@ -30,6 +30,8 @@ in {
   
   home.sessionVariables = {
     STARSHIP_CONFIG = lib.mkForce "$HOME/.config/starship/starship.toml";
+    NIXOS_OZONE_WL = "1";
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
   };
 
   programs.bash = {
