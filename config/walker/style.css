@@ -1,0 +1,50 @@
+@import url("/home/aleks/.cache/wal/colors-wofi.css");
+
+#window {
+  background-color: rgba(22, 22, 28, 0.4);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+#box {
+  margin: 5px;
+  padding: 10px;
+}
+
+#search {
+  margin: 10px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: none;
+  background-color: rgba(20, 20, 20, 0.2);
+  color: @foreground;
+  font-size: 16px;
+}
+
+#list, #scroll {
+  margin: 5px;
+}
+
+#item {
+  padding: 8px;
+  margin: 4px;
+  border-radius: 12px;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+#item:selected {
+  background-color: rgba(20, 20, 20, 0);
+  border: 2px solid @color7;
+}
+
+.icon {
+  margin: 5px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+.text {
+  margin: 5px;
+}
