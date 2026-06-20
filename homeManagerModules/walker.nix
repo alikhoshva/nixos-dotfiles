@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ config, lib, inputs, ... }:
 
 {
   imports = [ 
@@ -15,4 +15,7 @@
     runAsService = false;
   };
 
+  # Override Walker module's generated config files with our out-of-store symlinks
+  xdg.configFile."walker/style.css".source = config.lib.file.mkOutOfStoreSymlink "/home/aleks/nixos-dotfiles/config/walker/style.css";
+  xdg.configFile."walker/config.toml".source = lib.mkForce (config.lib.file.mkOutOfStoreSymlink "/home/aleks/nixos-dotfiles/config/walker/config.toml");
 }

@@ -15,7 +15,6 @@ let
     wal = "wal";
     yazi = "yazi";
     starship = "starship";
-    walker = "walker";
   };
 in {
   home.username = "aleks";
