@@ -11,6 +11,7 @@
 
 
 require("conf.monitor")
+require("conf.workspaces")
 require("conf.enviroments")
 require("conf.autostart")
 require("conf.input")

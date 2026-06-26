@@ -24,7 +24,13 @@
     libreoffice
     pavucontrol
     easyeffects
-    (prismlauncher.override { jdks = [ temurin-bin-17 temurin-bin-21 ]; })
+    (prismlauncher.override {
+      jdks = [
+        temurin-bin-17
+        temurin-bin-21
+        temurin-bin-25
+      ];
+    })
     # Desktop Utilities
     grim
     slurp
