@@ -6,7 +6,7 @@
     dbeaver-bin
     devcontainer
     (yazi.override { _7zz = pkgs._7zz-rar; })
-    antigravity-fhs
+    #antigravity-fhs
     devenv
 
   ];

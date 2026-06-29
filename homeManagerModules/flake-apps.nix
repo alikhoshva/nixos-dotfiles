@@ -1,13 +1,15 @@
-{ inputs, pkgs, ... }: {
+{ inputs, pkgs, ... }:
+let
+  system = pkgs.stdenv.hostPlatform.system;
+in
+{
 
   home.packages = [
-    #inputs.viu.packages.${pkgs.stdenv.hostPlatform.system}.default
-    #inputs.swww.packages.${pkgs.stdenv.hostPlatform.system}.swww
-    inputs.anipy-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
-    inputs.nvim-config.packages.${pkgs.stdenv.hostPlatform.system}.default
-    #(inputs.yazi.packages.${pkgs.stdenv.hostPlatform.system}.default.override {
-    #  _7zz = pkgs._7zz-rar;
-    #})
+    inputs.anipy-cli.packages.${system}.default
+    inputs.nvim-config.packages.${system}.default
+    inputs.antigravity-nix.packages.${system}.google-antigravity-no-fhs
+    #inputs.antigravity-nix.packages.${system}.google-antigravity-ide
+    inputs.antigravity-nix.packages.${system}.google-antigravity-cli
 
   ];
 

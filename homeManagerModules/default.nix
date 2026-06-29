@@ -1,6 +1,5 @@
 {
   imports = [
-    ./neovim.nix
     ./theme.nix
     ./vscode.nix
     ./xdg_desktop.nix

@@ -215,5 +215,10 @@
 
   environment.systemPackages = with pkgs; [ tuigreet ];
 
+  # Enable the gnome-keyring secrets daemon
+  services.gnome.gnome-keyring.enable = true;
+  # Ensure PAM unlocks the keyring automatically on login (for TTY and greetd)
+  security.pam.services.login.enableGnomeKeyring = true;
+
   system.stateVersion = "26.05"; # Did you read the comment?
 }

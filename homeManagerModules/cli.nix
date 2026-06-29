@@ -7,14 +7,12 @@
     powertop
     fastfetch # or neofetch
     wget
-    git
     lazydocker
     cachix
     #devpod-desktop
     # Scripting Dependencies
     jq
     socat
-    fzf
     vlc
   ];
 
