@@ -78,3 +78,13 @@ Do not report success or ask the user to switch configurations without testing y
 
 ### 3. Git Branching
 - Perform all development tasks on a separate feature branch. Do not commit edits directly to `main` unless they are simple documentation corrections.
+
+---
+
+## 4. Context & Token Optimization (Scan Efficiency)
+
+To keep evaluations fast and context usage low, follow these guidelines:
+- **Pinpoint, don't scan**: Use the modular directory map to target and open *only* the specific file relevant to the task (e.g., open `hardware/audio.nix` for sound problems).
+- **Ignore unrelated configs**: If a file is named `tlp.nix` and the current task is unrelated to battery or power management, do **not** view or read it.
+- **Avoid reading massive files**: Refrain from reading large configuration files (such as `noctalia.nix` which contains 600+ lines) unless the task explicitly requires editing them.
+
