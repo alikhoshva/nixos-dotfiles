@@ -10,4 +10,7 @@
       };
     };
   };
+
+  # Keep tuigreet package bundled with the greeter service configuration
+  environment.systemPackages = with pkgs; [ tuigreet ];
 }
