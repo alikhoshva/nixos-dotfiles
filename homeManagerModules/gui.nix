@@ -9,6 +9,7 @@
 
     wlogout
     networkmanagerapplet
+    seahorse
 
     # GUI Applications
     vivaldi

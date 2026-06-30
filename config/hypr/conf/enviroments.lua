@@ -34,3 +34,6 @@ hl.env("HYPRCURSOR_THEME", "catppuccin-mocha-light-cursors")
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("XCURSOR_THEME", "catppuccin-mocha-light-cursors")
 hl.env("XCURSOR_SIZE", "24")
+
+-- SSH Agent (GCR Keyring)
+hl.env("SSH_AUTH_SOCK", (os.getenv("XDG_RUNTIME_DIR") or "/run/user/1000") .. "/gcr/ssh")

@@ -32,12 +32,22 @@ in
     inputs.spicetify-nix.homeManagerModules.spicetify
   ];
   programs.git.enable = true;
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    settings = {
+      "*" = {
+        AddKeysToAgent = "yes";
+      };
+    };
+  };
   home.stateVersion = "25.11";
 
   home.sessionVariables = {
     STARSHIP_CONFIG = lib.mkForce "$HOME/.config/starship/starship.toml";
     NIXOS_OZONE_WL = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
+    SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gcr/ssh";
   };
 
   programs.bash = {
