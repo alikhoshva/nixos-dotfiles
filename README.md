@@ -64,8 +64,13 @@ Always verify your configuration compiles correctly before applying it:
 
 2. **System dry-build (verify evaluation without applying)**:
    ```bash
-   nixos-rebuild dry-build --flake .#nixos
+   nh os switch --dry
    ```
 
-3. **Branch workflow**:
-   Make complex refactors or additions on a separate Git branch first. Only merge to `main` when the dry-build succeeds!
+3. **Home Manager dry-build**:
+   ```bash
+   nh home switch --dry
+   ```
+
+4. **Branch workflow**:
+   Make complex refactors or additions on a separate Git branch first. Only merge to `main` when the dry-run succeeds!
