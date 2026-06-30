@@ -15,17 +15,17 @@ nixos-dotfiles/
 │
 ├── nixosModules/                 # System-wide NixOS configurations
 │   ├── default.nix               # Combines and imports all system categories
-│   ├── core/                     # nix, locale, security/keyrings, users, fonts
-│   ├── hardware/                 # boot, bluetooth, audio (pipewire), tlp, thinkpad, logind
-│   ├── services/                 # avahi, printing, docker, greeter, networking, cachix
-│   └── programs/                 # hyprland, steam, thunar
+│   ├── core/                     # Core system settings (locale, users, core packages, security)
+│   ├── hardware/                 # Hardware configurations (boot, audio, bluetooth, power management)
+│   ├── services/                 # Background system services (networking, virtualization, printing)
+│   └── programs/                 # System-level GUI & gaming applications
 │
 ├── homeManagerModules/           # User-space configurations (Home Manager)
 │   ├── default.nix               # Combines and imports all user categories
-│   ├── cli/                      # cli packages, shell aliases/helpers, fzf, git, ssh, nh
-│   ├── desktop/                  # themes, symlinks, xdg_desktop, walker, wallpaper, noctalia
-│   ├── programs/                 # gui packages, vscode, zen-browser, spicetify
-│   └── system/                   # system packages, latest (unstable), flake-apps, doc-settings
+│   ├── cli/                      # CLI tools, shells, git/ssh configs, and developer helpers
+│   ├── desktop/                  # Desktop environment styling, themes, app launchers, and symlinks
+│   ├── programs/                 # User GUI applications (browsers, editors, media players)
+│   └── system/                   # User system libraries, unstable packages, and manual settings
 │
 └── config/                       # Raw dotfiles (linked via Home Manager symlinks)
     ├── kitty/, waybar/, wofi/, hypr/, yazi/, starship/, etc.
