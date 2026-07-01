@@ -4,13 +4,12 @@ let
 in
 {
 
-  home.packages = [
-    inputs.anipy-cli.packages.${system}.default
-    inputs.nvim-config.packages.${system}.default
-    inputs.antigravity-nix.packages.${system}.google-antigravity-no-fhs
-    #inputs.antigravity-nix.packages.${system}.google-antigravity-ide
-    inputs.antigravity-nix.packages.${system}.google-antigravity-cli
-
+  home.packages = with inputs; [
+    anipy-cli.packages.${system}.default
+    nvim-config.packages.${system}.default
+    #inputs.antigravity-nix.packages.${system}.google-antigravity-no-fhs
+    antigravity-nix.packages.${system}.google-antigravity-ide
+    #inputs.antigravity-nix.packages.${system}.google-antigravity-cli
   ];
 
 }

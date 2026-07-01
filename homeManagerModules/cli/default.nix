@@ -6,5 +6,6 @@
     ./git.nix
     ./ssh.nix
     ./nh.nix
+    ./languages.nix
   ];
 }
