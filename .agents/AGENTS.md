@@ -1,4 +1,4 @@
-# AI Coding Agent Guidelines (AGENT.md)
+# AI Coding Agent Guidelines (AGENTS.md)
 
 Welcome! This repository contains a clean, modular NixOS and Home Manager setup using Nix Flakes and the `nh` (Nix Helper) CLI. 
 
@@ -87,4 +87,3 @@ To keep evaluations fast and context usage low, follow these guidelines:
 - **Pinpoint, don't scan**: Use the modular directory map to target and open *only* the specific file relevant to the task (e.g., open `hardware/audio.nix` for sound problems).
 - **Ignore unrelated configs**: If a file is named `tlp.nix` and the current task is unrelated to battery or power management, do **not** view or read it.
 - **Avoid reading massive files**: Refrain from reading large configuration files (such as `noctalia.nix` which contains 600+ lines) unless the task explicitly requires editing them.
-
