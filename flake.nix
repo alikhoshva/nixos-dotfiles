@@ -28,6 +28,10 @@
       url = "github:jacopone/antigravity-nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    curd = {
+      url = "github:Wraient/curd";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
