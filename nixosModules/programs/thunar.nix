@@ -7,4 +7,6 @@
   ];
   services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.tumbler.enable = true; # Thumbnail support for images
+  services.udisks2.enable = true; # Disk management and mounting service
 }
+
