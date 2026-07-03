@@ -88,6 +88,7 @@
       ];
 
       userSettings = {
+        "password-store" = "gnome-libsecret";
         "window.titleBarStyle" = "custom";
         "window.menuBarVisibility" = "top";
         "window.menuStyle" = "custom";

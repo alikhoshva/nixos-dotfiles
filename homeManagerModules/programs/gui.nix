@@ -5,6 +5,7 @@
     # Shell & Session
     hyprlock
     hypridle
+    hyprpolkitagent
     waybar
 
     wlogout
@@ -32,6 +33,7 @@
         temurin-bin-25
       ];
     })
+    gparted-full
     # Desktop Utilities
     grim
     slurp
