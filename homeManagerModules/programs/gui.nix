@@ -22,6 +22,7 @@
     vesktop
     zoom-us
     filezilla
+    qdirstat
     obsidian
     libreoffice
     pavucontrol
@@ -33,7 +34,6 @@
         temurin-bin-25
       ];
     })
-    gparted-full
     # Desktop Utilities
     grim
     slurp
@@ -44,4 +44,20 @@
     nwg-look
     mpv
   ];
+
+  systemd.user.services.hyprpolkitagent = {
+    Unit = {
+      Description = "Hyprland Polkit Authentication Agent";
+      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent";
+      Restart = "on-failure";
+      TimeoutStopSec = "5sec";
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+  };
 }
