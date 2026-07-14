@@ -9,7 +9,10 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Kernel options.
-  boot.kernelParams = [ "zswap.enabled=1" ];
+  boot.kernelParams = [
+    "zswap.enabled=1"
+    "amdgpu.noretry=0"
+  ];
 
   # Swap file configuration.
   swapDevices = [

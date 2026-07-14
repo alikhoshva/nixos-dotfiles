@@ -1,4 +1,4 @@
-{
+{ inputs, pkgs, ... }: {
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -12,4 +12,8 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  environment.systemPackages = [
+    inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
 }
