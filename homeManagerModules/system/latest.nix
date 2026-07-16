@@ -8,6 +8,7 @@
     (yazi.override { _7zz = pkgs._7zz-rar; })
     #antigravity-fhs
     devenv
+    pangolin-cli
 
   ];
 }

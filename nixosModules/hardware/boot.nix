@@ -12,6 +12,9 @@
   boot.kernelParams = [
     "zswap.enabled=1"
     "amdgpu.noretry=0"
+    "amdgpu.dcdebugmask=0x10"
+    "amdgpu.sg_display=0"
+    "amdgpu.gpu_recovery=1"
   ];
 
   # Swap file configuration.

@@ -18,6 +18,9 @@
     mutableExtensionsDir = false;
     profiles.default = {
       extensions = with pkgs-unstable.vscode-extensions; [
+        # --- Themes & Icons ---
+        pkief.material-icon-theme
+
         # --- Nix Essentials ---
         jnoortheen.nix-ide
 
@@ -43,6 +46,8 @@
         mkhl.direnv
         charliermarsh.ruff
         ms-python.vscode-pylance
+
+        james-yu.latex-workshop
       ];
 
       # --- Neovim Keybindings in VSCode ---
@@ -90,7 +95,7 @@
       userSettings = {
         "password-store" = "gnome-libsecret";
         "window.titleBarStyle" = "custom";
-        "window.menuBarVisibility" = "top";
+        "window.menuBarVisibility" = "classic";
         "window.menuStyle" = "custom";
         "window.dialogStyle" = "custom";
         "window.customTitleBarVisibility" = "never";
@@ -110,6 +115,17 @@
           inputs.nvim-config.packages.${pkgs.stdenv.hostPlatform.system}.default
         }/bin/nvim";
         "vscode-neovim.neovimInitVimPaths.linux" = "";
+
+        # --- Theme and Aesthetics ---
+        "workbench.colorTheme" = "Dark Modern";
+        "workbench.iconTheme" = "material-icon-theme";
+
+        # --- Typography ---
+        "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'JetBrainsMono NF', 'monospace', monospace";
+        "editor.fontSize" = 14;
+        "editor.fontLigatures" = true;
+        "editor.lineHeight" = 1.6;
+        "editor.letterSpacing" = 0.5;
 
         # --- Neovim-like UI and Visuals ---
         "editor.lineNumbers" = "relative";
