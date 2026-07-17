@@ -16,6 +16,7 @@ disabled = true
 [directory]
 truncation_length = 3
 style = "bold green"
+truncate_to_repo = true
 
 # Show only the Python symbol (hides version and venv name)
 [python]
