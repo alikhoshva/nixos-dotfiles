@@ -77,7 +77,7 @@ Do not report success or ask the user to switch configurations without testing y
   ```
 
 ### 3. Git Branching
-- Perform all development tasks on a separate feature branch. Do not commit edits directly to `main` unless they are simple documentation corrections.
+- Perform all development tasks on a separate feature branch for significant changes (e.g. affecting more than 2 files). For minor edits (2 files or fewer), you may work directly on the `main` branch. Do not commit edits directly to `main` for large tasks.
 
 ---
 
