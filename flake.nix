@@ -29,6 +29,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+    import-tree.url = "github:denful/import-tree";
   };
 
   outputs =
@@ -51,7 +52,7 @@
           };
           modules = [
             ./host/configuration.nix
-            ./nixosModules
+            (inputs.import-tree ./nixosModules)
           ];
         };
       };
@@ -71,10 +72,13 @@
             inherit inputs;
             inherit pkgs-unstable;
           };
-          modules = [ ./host/home.nix ];
+          modules = [
+            ./host/home.nix
+            (inputs.import-tree ./homeManagerModules)
+          ];
         };
       };
 
-      homeManagerModules.default = import ./homeManagerModules;
+      homeManagerModules.default = inputs.import-tree ./homeManagerModules;
     };
 }

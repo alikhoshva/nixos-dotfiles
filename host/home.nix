@@ -10,7 +10,6 @@
   home.homeDirectory = "/home/aleks";
 
   imports = [
-    ../homeManagerModules
     inputs.zen-browser.homeModules.twilight
     inputs.spicetify-nix.homeManagerModules.spicetify
   ];

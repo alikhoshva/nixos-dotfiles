@@ -6,9 +6,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    
-    # Import the reorganized modular NixOS configuration
-    ../nixosModules
   ];
 
   # This value determines the NixOS release from which the default
