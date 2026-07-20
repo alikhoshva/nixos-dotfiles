@@ -7,7 +7,7 @@ local terminal    = "kitty"
 local fileManager = "thunar"
 --local menu        = 'bash -c "pkill wofi; wofi --show drun --conf ~/.config/wofi/config.conf --style ~/.config/wofi/style.css"'
 local menu        = "walker"
-local browser     = "vivaldi"
+local browser     = "zen-twilight"
 local editor      = "code"
 
 ---------------------

@@ -5,7 +5,7 @@ in
 {
 
   home.packages = with inputs; [
-    anipy-cli.packages.${system}.default
+    #anipy-cli.packages.${system}.default
     nvim-config.packages.${system}.default
     #curd.packages.${system}.default
     #inputs.antigravity-nix.packages.${system}.google-antigravity-no-fhs
