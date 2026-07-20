@@ -19,5 +19,8 @@
       Cryptomining = true;
       Fingerprinting = true;
     };
+    Preferences = {
+      "widget.wayland.fractional-scale.enabled" = false;
+    };
   };
 }

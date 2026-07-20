@@ -9,6 +9,7 @@
     wget
     lazydocker
     cachix
+    nix-output-monitor # nom - provides interactive build logs & graphs
     #devpod-desktop
     # Scripting Dependencies
     jq

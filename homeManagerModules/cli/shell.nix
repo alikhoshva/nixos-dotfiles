@@ -13,6 +13,9 @@
       vim = "nvim";
       sv = "sudo nvim";
       di = "devenv-init";
+      nos = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
+      hms = "home-manager switch --flake ~/nixos-dotfiles#aleks";
+      nclean = "sudo nix-collect-garbage --delete-older-than 14d && nix store gc";
     };
     initExtra = ''
       function y() {
@@ -36,6 +39,59 @@ use devenv
 EOF
         direnv allow
       }
+
+      function nh() {
+        local subcmd="$1"
+        local action="''${2:-switch}"
+        case "$subcmd" in
+          os)
+            if command -v nom >/dev/null 2>&1; then
+              sudo -v && sudo nixos-rebuild "$action" --flake ~/nixos-dotfiles#nixos 2>&1 | nom
+            else
+              sudo nixos-rebuild "$action" --flake ~/nixos-dotfiles#nixos
+            fi
+            ;;
+          home)
+            if command -v nom >/dev/null 2>&1; then
+              home-manager "$action" --flake ~/nixos-dotfiles#aleks 2>&1 | nom
+            else
+              home-manager "$action" --flake ~/nixos-dotfiles#aleks
+            fi
+            ;;
+          clean)
+            echo "Running safe garbage collection..."
+            sudo nix-collect-garbage --delete-older-than 14d
+            nix store gc
+            ;;
+          *)
+            echo "Usage: nh [os|home|clean] [switch|test|boot]"
+            ;;
+        esac
+      }
+
+      function _nh_complete() {
+        local cur prev words cword
+        cur="''${COMP_WORDS[COMP_CWORD]}"
+        prev="''${COMP_WORDS[COMP_CWORD-1]}"
+        cword="$COMP_CWORD"
+
+        case "$cword" in
+          1)
+            COMPREPLY=( $(compgen -W "os home clean" -- "$cur") )
+            ;;
+          2)
+            case "''${COMP_WORDS[1]}" in
+              os)
+                COMPREPLY=( $(compgen -W "switch test boot" -- "$cur") )
+                ;;
+              home)
+                COMPREPLY=( $(compgen -W "switch" -- "$cur") )
+                ;;
+            esac
+            ;;
+        esac
+      }
+      complete -F _nh_complete nh
 
       eval "$(devenv hook bash)"
     '';
