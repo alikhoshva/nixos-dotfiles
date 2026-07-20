@@ -13,9 +13,6 @@
       vim = "nvim";
       sv = "sudo nvim";
       di = "devenv-init";
-      nos = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
-      hms = "home-manager switch --flake ~/nixos-dotfiles#aleks";
-      nclean = "sudo nix-collect-garbage --delete-older-than 14d && nix store gc";
     };
     initExtra = ''
       function y() {
