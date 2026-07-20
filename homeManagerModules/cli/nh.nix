@@ -1,5 +1,19 @@
-{ ... }: {
-  # Note: `programs.nh` is kept disabled due to compatibility issues with Determinate Nix.
-  # Instead, custom wrapper functions and aliases (`nh`, `nos`, `nhs`) are configured in `shell.nix`.
+{ pkgs, ... }:
+
+let
+  nhScript = pkgs.writeShellApplication {
+    name = "nh";
+    runtimeInputs = with pkgs; [
+      git
+      nix-output-monitor
+      nvd
+    ];
+    text = builtins.readFile ./../../config/scripts/nh.sh;
+  };
+in
+{
+  # Note: `programs.nh` module is kept disabled due to compatibility issues with Determinate Nix.
+  # We package our custom standalone script from config/scripts/nh.sh into an executable binary on $PATH.
+  home.packages = [ nhScript ];
 }
 
