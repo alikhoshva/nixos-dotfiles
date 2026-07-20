@@ -1,10 +1,5 @@
-{ pkgs, pkgs-unstable, ... }: {
-  # programs.nh = {
-  #   enable = true;
-  #   package = pkgs-unstable.nh;
-  #   clean.enable = true;
-  #   clean.extraArgs = "--keep-since 7d --keep 5";
-  #   flake = "/home/aleks/nixos-dotfiles"; # sets NH_OS_FLAKE variable for you
-  # };
+{ ... }: {
+  # Note: `programs.nh` is kept disabled due to compatibility issues with Determinate Nix.
+  # Instead, custom wrapper functions and aliases (`nh`, `nos`, `nhs`) are configured in `shell.nix`.
 }
 

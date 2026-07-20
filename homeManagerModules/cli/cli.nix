@@ -10,6 +10,7 @@
     lazydocker
     cachix
     nix-output-monitor # nom - provides interactive build logs & graphs
+    nvd # Package diffing tool for Nix profiles
     #devpod-desktop
     # Scripting Dependencies
     jq
