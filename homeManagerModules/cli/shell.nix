@@ -13,8 +13,6 @@
       vim = "nvim";
       sv = "sudo nvim";
       di = "devenv-init";
-      nos = "nh os switch";
-      nhs = "nh home switch";
     };
     initExtra = ''
       function y() {
@@ -47,7 +45,7 @@ EOF
 
         case "$cword" in
           1)
-            COMPREPLY=( $(compgen -W "os home clean diff" -- "$cur") )
+            COMPREPLY=( $(compgen -W "os home clean diff update" -- "$cur") )
             ;;
           2)
             case "''${COMP_WORDS[1]}" in
