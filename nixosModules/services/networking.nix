@@ -35,6 +35,7 @@
 
     settings = {
       Resolve = {
+        MulticastDNS = "no";
         Domains = [ ];
         # Global fallback DNS when away from the home network
         FallbackDNS = [
