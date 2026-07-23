@@ -8,13 +8,15 @@
   boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Kernel options.
+  # AMD GPU & Kernel options.
+  hardware.amdgpu.initrd.enable = true;
   boot.kernelParams = [
     "zswap.enabled=1"
     "amdgpu.noretry=0"
     "amdgpu.dcdebugmask=0x10"
     "amdgpu.sg_display=0"
     "amdgpu.gpu_recovery=1"
+    "amdgpu.abmlevel=0"
   ];
 
   # Swap file configuration.
