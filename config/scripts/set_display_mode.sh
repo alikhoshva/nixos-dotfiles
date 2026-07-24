@@ -81,7 +81,7 @@ if [[ -n "$PRESET" ]]; then
   esac
 fi
 
-# 1. Hyprland Monitor Configuration
+# 1. Hyprland Monitor Configuration (Keep monitor scale = 1 to prevent Zen Browser double-scaling)
 if [[ "$DUAL_MODE" == true ]]; then
   hyprctl eval 'hl.monitor({ output = "eDP-1", mode = "1920x1200@60", position = "0x0", scale = 1, disabled = false }) hl.monitor({ output = "HDMI-A-1", mode = "3840x2160@120", position = "1920x0", scale = 1, disabled = false })' 2>/dev/null || {
     hyprctl keyword monitor "eDP-1, 1920x1200@60, 0x0, 1"
@@ -94,20 +94,34 @@ else
   }
 fi
 
-# 2. Set Hyprland Lua & DBus session environment variables for newly launched apps
+# 2. Dynamic Kitty Font Size & Live Scaling
+KITTY_FONT_SIZE=$(awk "BEGIN {printf \"%.1f\", 12.0 * $SCALE}")
+hyprctl eval "hl.env(\"KITTY_FONT_SIZE\", \"$KITTY_FONT_SIZE\")" 2>/dev/null
+dbus-update-activation-environment --systemd KITTY_FONT_SIZE="$KITTY_FONT_SIZE" 2>/dev/null
+# Live update running Kitty instances if socket control is active
+kitty @ --to=unix:@mykitty set-font-size "$KITTY_FONT_SIZE" 2>/dev/null &
+
+# 3. Dynamic Cursor Scaling (Base 24px * SCALE -> 36px on 4K)
+CURSOR_SIZE=$(awk "BEGIN {print int(24 * $SCALE + 0.5)}")
+hyprctl setcursor catppuccin-mocha-light-cursors "$CURSOR_SIZE" 2>/dev/null
+hyprctl eval "hl.env(\"HYPRCURSOR_SIZE\", \"$CURSOR_SIZE\") hl.env(\"XCURSOR_SIZE\", \"$CURSOR_SIZE\")" 2>/dev/null
+dbus-update-activation-environment --systemd HYPRCURSOR_SIZE="$CURSOR_SIZE" XCURSOR_SIZE="$CURSOR_SIZE" 2>/dev/null
+dconf write /org/gnome/desktop/interface/cursor-size "$CURSOR_SIZE" 2>/dev/null
+
+# 4. Set Hyprland Lua & DBus session environment variables for GTK/Qt/Elm
 hyprctl eval "hl.env(\"QT_SCALE_FACTOR\", \"$SCALE\") hl.env(\"GDK_SCALE\", \"1\") hl.env(\"ELM_SCALE\", \"$SCALE\")" 2>/dev/null
 dbus-update-activation-environment --systemd QT_SCALE_FACTOR="$SCALE" GDK_SCALE=1 ELM_SCALE="$SCALE" 2>/dev/null
 
-# 3. Live GTK text scaling
+# 5. Live GTK text scaling
 dconf write /org/gnome/desktop/interface/text-scaling-factor "$SCALE"
 
-# 4. Live X11/XWayland DPI calculation (Base 96 * SCALE)
+# 6. Live X11/XWayland DPI calculation (Base 96 * SCALE)
 DPI=$(awk "BEGIN {print int($SCALE * 96 + 0.5)}")
 if command -v xrdb &> /dev/null; then
   echo "Xft.dpi: $DPI" | xrdb -merge
 fi
 
-# 5. Restart Noctalia (quickshell) with updated Qt scale factor
+# 7. Restart Noctalia (quickshell) with updated Qt scale factor
 pkill -f quickshell 2>/dev/null
 pkill -f noctalia-shell 2>/dev/null
 sleep 0.5
