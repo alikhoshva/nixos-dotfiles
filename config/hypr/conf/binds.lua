@@ -79,14 +79,14 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Monitor Management
--- External 4K Desktop Mode.
-hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("~/.config/scripts/desktop_4k.sh"))
+-- External 4K Desktop Mode
+hl.bind(mainMod .. " + O",         hl.dsp.exec_cmd("~/.config/scripts/set_display_mode.sh --preset desktop-4k"))
 
--- External 1080p Game Mode.
-hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("~/.config/scripts/gamemode_1080p.sh"))
+-- External 1080p Game Mode
+hl.bind(mainMod .. " + G",         hl.dsp.exec_cmd("~/.config/scripts/set_display_mode.sh --preset game-1080p"))
 
--- Laptop only. Disable external FIRST.
-hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd([[hyprctl eval 'hl.monitor({ output = "HDMI-A-1", disabled = true }) hl.monitor({ output = "eDP-1", mode = "1920x1200@60", position = "0x0", scale = 1, disabled = false })']]))
+-- Laptop only
+hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd("~/.config/scripts/set_display_mode.sh --preset laptop-only"))
 
 -- Reset both side-by-side (no overlap)
-hl.bind(mainMod .. " + I", hl.dsp.exec_cmd([[hyprctl eval 'hl.monitor({ output = "eDP-1", mode = "1920x1200@60", position = "0x0", scale = 1, disabled = false }) hl.monitor({ output = "HDMI-A-1", mode = "3840x2160@120", position = "1920x0", scale = 1, disabled = false })']]))
+hl.bind(mainMod .. " + I",         hl.dsp.exec_cmd("~/.config/scripts/set_display_mode.sh --preset dual-monitor"))
