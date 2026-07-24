@@ -2,22 +2,20 @@
 
 # Create an array of your configuration files
 files=(
-    "$HOME/.config/hypr/hyprland.conf"
+    "$HOME/.config/hypr/hyprland.lua"
     "$HOME/.config/hypr/hyprpaper.conf"
     "$HOME/.config/hypr/hyprlock.conf"
-    "$HOME/.config/hypr/conf/animations.conf"
-    "$HOME/.config/hypr/conf/autostart.conf"
-    "$HOME/.config/hypr/conf/binds.conf"
-    "$HOME/.config/hypr/conf/cursor.conf"
-    "$HOME/.config/hypr/conf/decoration.conf"
-    "$HOME/.config/hypr/conf/environments.conf"
-    "$HOME/.config/hypr/conf/general.conf"
-    "$HOME/.config/hypr/conf/gestures.conf"
-    "$HOME/.config/hypr/conf/input.conf"
-    "$HOME/.config/hypr/conf/layouts.conf"
-    "$HOME/.config/hypr/conf/misc.conf"
-    "$HOME/.config/hypr/conf/monitor.conf"
-    "$HOME/.config/hypr/conf/windowrules.conf"
+    "$HOME/.config/hypr/hypridle.conf"
+    "$HOME/.config/hypr/conf/animations.lua"
+    "$HOME/.config/hypr/conf/autostart.lua"
+    "$HOME/.config/hypr/conf/binds.lua"
+    "$HOME/.config/hypr/conf/enviroments.lua"
+    "$HOME/.config/hypr/conf/input.lua"
+    "$HOME/.config/hypr/conf/look.lua"
+    "$HOME/.config/hypr/conf/monitor.lua"
+    "$HOME/.config/hypr/conf/perms.lua"
+    "$HOME/.config/hypr/conf/windowrules.lua"
+    "$HOME/.config/hypr/conf/workspaces.lua"
 )
 
 # Use wofi to create a menu and get the selected file
