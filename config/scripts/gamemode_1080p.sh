@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Game Mode: Switch display to 1080p@120Hz, reset GTK/Qt scale environment, and reset Noctalia UI to 1.0
+# Game Mode: Switch display to 1080p@120Hz and reset GTK/Qt scale environment to 1.0
 
 # 1. Hyprland monitor switch to 1080p on HDMI-A-1 and disable eDP-1
 hyprctl eval 'hl.monitor({ output = "eDP-1", disabled = true }) hl.monitor({ output = "HDMI-A-1", mode = "1920x1080@120", position = "0x0", scale = 1, disabled = false })' 2>/dev/null || {
@@ -24,5 +24,3 @@ pkill -f quickshell 2>/dev/null
 pkill -f noctalia-shell 2>/dev/null
 sleep 0.5
 QT_SCALE_FACTOR=1.0 noctalia-shell &> /dev/null & disown
-
-
