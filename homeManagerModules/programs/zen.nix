@@ -21,6 +21,9 @@
     };
     Preferences = {
       "widget.wayland.fractional-scale.enabled" = false;
+      "layout.css.devPixelsPerPx" = "1.5";
+      "network.dns.disablePrefetch" = false;
+      "accessibility.force_disabled" = 1;
     };
   };
 }
