@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   # udev rules for Everglide SU75 Pro keyboard WebHID support
