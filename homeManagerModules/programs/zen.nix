@@ -21,6 +21,8 @@
     Preferences = {
       "widget.wayland.fractional-scale.enabled" = false;
       "accessibility.force_disabled" = 1;
+      "gfx.webrender.all" = true;
+      "media.ffmpeg.vaapi.enabled" = true;
     };
   };
 }
