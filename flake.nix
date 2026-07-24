@@ -37,6 +37,15 @@
     let
       system = "x86_64-linux";
       lib = inputs.nixpkgs.lib;
+      pkgs = import inputs.nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+          permittedInsecurePackages = [
+            #"pnpm-10.29.2"
+          ];
+        };
+      };
       pkgs-unstable = import inputs.nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
@@ -59,15 +68,7 @@
 
       homeConfigurations = {
         aleks = inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = import inputs.nixpkgs {
-            inherit system;
-            config = {
-              allowUnfree = true;
-              permittedInsecurePackages = [
-                #"pnpm-10.29.2"
-              ];
-            };
-          };
+          inherit pkgs;
           extraSpecialArgs = {
             inherit inputs;
             inherit pkgs-unstable;

@@ -2,7 +2,15 @@
   # Bootloader.
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "nodev";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.grub.useOSProber = false;
+  boot.loader.grub.extraEntries = ''
+    menuentry "Windows Boot Manager" {
+      insmod part_gpt
+      insmod fat
+      search --no-floppy --fs-uuid --set=root 9837-0DAD
+      chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+    }
+  '';
   boot.loader.grub.efiSupport = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
