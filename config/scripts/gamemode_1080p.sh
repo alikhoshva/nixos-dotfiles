@@ -7,10 +7,8 @@ hyprctl eval 'hl.monitor({ output = "eDP-1", disabled = true }) hl.monitor({ out
   hyprctl keyword monitor "HDMI-A-1, 1920x1080@120, 0x0, 1"
 }
 
-# 2. Reset Hyprland & DBus session environment variables for newly launched apps
-hyprctl setenv QT_SCALE_FACTOR 1.0
-hyprctl setenv GDK_SCALE 1
-hyprctl setenv ELM_SCALE 1.0
+# 2. Reset Hyprland Lua & DBus session environment variables for newly launched apps
+hyprctl eval 'hl.env("QT_SCALE_FACTOR", "1.0") hl.env("GDK_SCALE", "1") hl.env("ELM_SCALE", "1.0")'
 dbus-update-activation-environment --systemd QT_SCALE_FACTOR=1.0 GDK_SCALE=1 ELM_SCALE=1.0 2>/dev/null
 
 # 3. Live GTK text scaling down to 1.0
@@ -21,9 +19,10 @@ if command -v xrdb &> /dev/null; then
   echo "Xft.dpi: 96" | xrdb -merge
 fi
 
-# 5. Restart noctalia-shell back to 1.0x scale for 1080p
-if pkill -f noctalia-shell; then
-  QT_SCALE_FACTOR=1.0 noctalia-shell &> /dev/null & disown
-fi
+# 5. Restart Noctalia (quickshell) back to 1.0x scale for 1080p
+pkill -f quickshell 2>/dev/null
+pkill -f noctalia-shell 2>/dev/null
+sleep 0.5
+QT_SCALE_FACTOR=1.0 noctalia-shell &> /dev/null & disown
 
 
