@@ -21,6 +21,9 @@ case "$subcmd" in
     else
       sudo -v && sudo nixos-rebuild "$action" --flake "$flake_dir#nixos" "$@"
     fi
+    if [[ "$action" =~ ^(switch|test|boot|build)$ ]] && command -v cachix >/dev/null 2>&1; then
+      (nix build "$flake_dir#nixosConfigurations.nixos.config.system.build.toplevel" --json 2>/dev/null | jq -r '.[].outputs | to_entries[].value' | cachix push aleks-nixos-cache &>/dev/null &)
+    fi
     ;;
   home)
     action="${1:-switch}"
@@ -29,6 +32,9 @@ case "$subcmd" in
       home-manager "$action" --flake "$flake_dir#aleks" "$@" 2>&1 | nom
     else
       home-manager "$action" --flake "$flake_dir#aleks" "$@"
+    fi
+    if [[ "$action" =~ ^(switch|build)$ ]] && command -v cachix >/dev/null 2>&1; then
+      (nix build "$flake_dir#homeConfigurations.aleks.activationPackage" --json 2>/dev/null | jq -r '.[].outputs | to_entries[].value' | cachix push aleks-nixos-cache &>/dev/null &)
     fi
     ;;
   clean)
