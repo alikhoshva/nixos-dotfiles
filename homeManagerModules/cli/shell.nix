@@ -3,9 +3,7 @@
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
     SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gcr/ssh";
     DEVENV_CACHIX_PUSH = "aleks-nixos-cache";
-    GDK_DPI_SCALE = "1.5";
     XFT_DPI = "144";
-    QT_SCALE_FACTOR = "1.5";
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
   };
 
