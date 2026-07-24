@@ -22,7 +22,7 @@ case "$subcmd" in
       sudo -v && sudo nixos-rebuild "$action" --flake "$flake_dir#nixos" "$@"
     fi
     if [[ "$action" =~ ^(switch|test|boot|build)$ ]] && command -v cachix >/dev/null 2>&1; then
-      (nix build "$flake_dir#nixosConfigurations.nixos.config.system.build.toplevel" --json 2>/dev/null | jq -r '.[].outputs | to_entries[].value' | cachix push aleks-nixos-cache &>/dev/null &)
+      (nix path-info -r "$flake_dir#homeConfigurations.aleks.activationPackage" 2>/dev/null | grep -E "neovim-unwrapped|walker|elephant|noctalia|antigravity" | cachix push aleks-nixos-cache &>/dev/null &)
     fi
     ;;
   home)
@@ -34,7 +34,7 @@ case "$subcmd" in
       home-manager "$action" --flake "$flake_dir#aleks" "$@"
     fi
     if [[ "$action" =~ ^(switch|build)$ ]] && command -v cachix >/dev/null 2>&1; then
-      (nix build "$flake_dir#homeConfigurations.aleks.activationPackage" --json 2>/dev/null | jq -r '.[].outputs | to_entries[].value' | cachix push aleks-nixos-cache &>/dev/null &)
+      (nix path-info -r "$flake_dir#homeConfigurations.aleks.activationPackage" 2>/dev/null | grep -E "neovim-unwrapped|walker|elephant|noctalia|antigravity" | cachix push aleks-nixos-cache &>/dev/null &)
     fi
     ;;
   clean)
