@@ -2,6 +2,7 @@
   home.sessionVariables = {
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
     SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gcr/ssh";
+    DEVENV_CACHIX_PUSH = "aleks-nixos-cache";
   };
 
   programs.bash = {
