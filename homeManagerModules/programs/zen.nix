@@ -19,6 +19,7 @@
       Fingerprinting = true;
     };
     Preferences = {
+      "widget.wayland.fractional-scale.enabled" = false;
       "accessibility.force_disabled" = 1;
     };
   };
