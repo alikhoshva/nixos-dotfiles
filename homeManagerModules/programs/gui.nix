@@ -13,7 +13,9 @@
     seahorse
 
     # GUI Applications
-    vivaldi
+    (vivaldi.override {
+      commandLineArgs = "--ozone-platform=wayland --use-gl=egl --enable-gpu-rasterization --enable-zero-copy --ignore-gpu-blocklist";
+    })
     kitty
     #google-chrome
     xarchiver
