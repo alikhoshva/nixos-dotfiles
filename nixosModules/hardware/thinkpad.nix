@@ -21,6 +21,4 @@
       [ "level auto" 84 32767 ]
     ];
   };
-
-  services.upower.enable = true;
 }

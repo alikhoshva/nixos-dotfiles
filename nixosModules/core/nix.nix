@@ -2,10 +2,6 @@
   imports = [
     inputs.determinate.nixosModules.default
   ];
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
 
   nix.optimise.automatic = true;
 

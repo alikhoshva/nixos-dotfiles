@@ -5,8 +5,6 @@
     enable = true;
     alsa.enable = true;
     pulse.enable = true;
-    jack.enable = false;
-    wireplumber.enable = true;
   };
 
   services.pipewire.extraConfig.pipewire = {

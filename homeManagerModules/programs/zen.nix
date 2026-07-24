@@ -3,7 +3,6 @@
 {
   programs.zen-browser.enable = true;
   programs.zen-browser.policies = {
-    AutofillAddressEnabled = true;
     AutofillCreditCardEnabled = false;
     DisableAppUpdate = true;
     DisableFeedbackCommands = true;
@@ -20,9 +19,6 @@
       Fingerprinting = true;
     };
     Preferences = {
-      "widget.wayland.fractional-scale.enabled" = false;
-      "layout.css.devPixelsPerPx" = "1.5";
-      "network.dns.disablePrefetch" = false;
       "accessibility.force_disabled" = 1;
     };
   };

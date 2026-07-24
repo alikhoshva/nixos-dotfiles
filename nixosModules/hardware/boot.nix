@@ -5,16 +5,12 @@
   boot.loader.grub.useOSProber = true;
   # boot.loader.grub.memtest86.enable = true;
   boot.loader.grub.efiSupport = true;
-  boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # AMD GPU & Kernel options.
   hardware.amdgpu.initrd.enable = true;
   boot.kernelParams = [
     "zswap.enabled=1"
-    "amdgpu.noretry=0"
-    "amdgpu.dcdebugmask=0x10"
-    "amdgpu.sg_display=0"
     "amdgpu.gpu_recovery=1"
     "amdgpu.abmlevel=0"
   ];
