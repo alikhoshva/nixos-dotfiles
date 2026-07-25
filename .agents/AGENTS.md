@@ -62,18 +62,14 @@ git add <newfile>  # or git add .
 before running any nix commands, otherwise Nix will throw an "uncommitted/no file found" error.
 
 ### 2. Mandatory Local Verification
-Do not report success or ask the user to switch configurations without testing your changes first. You must run:
+Do not report success or ask the user to switch configurations without testing your changes first. Home Manager is integrated directly as a NixOS module (`nixosModules/core/home-manager.nix`), so system and user configurations are evaluated together. You must run:
 - **Flake syntax evaluation**:
   ```bash
   nix flake check
   ```
-- **System evaluation & link dry-run**:
+- **Unified system & home evaluation dry-run**:
   ```bash
   nh os switch --dry
-  ```
-- **Home Manager evaluation & link dry-run**:
-  ```bash
-  nh home switch --dry
   ```
 
 ### 3. Git Branching

@@ -35,21 +35,14 @@ nixos-dotfiles/
 
 ## How to Apply Changes
 
-Both system and home environment modifications are managed using the modern `nh` tool.
+System and Home Manager configurations are fully unified into a single NixOS flake output (`nixosConfigurations.nixos`). All changes (both system-wide and user-space dotfiles/apps) are built and applied together using `nh`.
 
-### 1. Rebuilding the NixOS System Configuration
-To build and apply system-wide settings (e.g. bootloader, system packages, NixOS services):
+### Rebuilding the Unified Configuration
+To build and apply all system and Home Manager settings in one command:
 ```bash
 nh os switch
 ```
-*Behind the scenes, this will build the configuration target defined under `nixosConfigurations` in `flake.nix`.*
-
-### 2. Rebuilding the Home Manager Configuration
-To build and apply user-specific settings (e.g. dotfiles, shell aliases, user applications, themes):
-```bash
-nh home switch
-```
-*Behind the scenes, this will build the user profile defined under `homeConfigurations` in `flake.nix`.*
+*Behind the scenes, `nixosModules/core/home-manager.nix` integrates Home Manager directly into the `nixos` system evaluation.*
 
 ---
 
@@ -62,15 +55,11 @@ Always verify your configuration compiles correctly before applying it:
    nix flake check
    ```
 
-2. **System dry-build (verify evaluation without applying)**:
+2. **Unified evaluation & dry-build**:
    ```bash
    nh os switch --dry
    ```
+   *This evaluates both NixOS and Home Manager configurations to verify there are no syntax or type errors.*
 
-3. **Home Manager dry-build**:
-   ```bash
-   nh home switch --dry
-   ```
-
-4. **Branch workflow**:
+3. **Branch workflow**:
    Make complex refactors or additions on a separate Git branch first. Only merge to `main` when the dry-run succeeds!

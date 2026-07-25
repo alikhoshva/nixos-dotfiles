@@ -1,0 +1,16 @@
+# Nix build outputs & symlinks
+result
+result-*
+
+# Development environments & direnv
+.direnv/
+
+# Editor temporary & swap files
+*.swp
+*~
+.idea/
+.vscode/
+
+# OS metadata
+.DS_Store
+Thumbs.db
