@@ -36,15 +36,6 @@
     let
       system = "x86_64-linux";
       lib = inputs.nixpkgs.lib;
-      pkgs = import inputs.nixpkgs {
-        inherit system;
-        config = {
-          allowUnfree = true;
-          permittedInsecurePackages = [
-            #"pnpm-10.29.2"
-          ];
-        };
-      };
       pkgs-unstable = import inputs.nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
@@ -59,27 +50,10 @@
             inherit pkgs-unstable;
           };
           modules = [
-            { nixpkgs.pkgs = pkgs; }
             ./host/configuration.nix
             (inputs.import-tree ./nixosModules)
           ];
         };
       };
-
-      homeConfigurations = {
-        aleks = inputs.home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = {
-            inherit inputs;
-            inherit pkgs-unstable;
-          };
-          modules = [
-            ./host/home.nix
-            (inputs.import-tree ./homeManagerModules)
-          ];
-        };
-      };
-
-      homeManagerModules.default = inputs.import-tree ./homeManagerModules;
     };
 }

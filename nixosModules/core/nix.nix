@@ -14,7 +14,8 @@
   # Disable command-not-found legacy module which causes builtins.derivation warnings with Flakes
   programs.command-not-found.enable = false;
 
-  # Allow unfree packages is handled directly on pkgs instantiation in flake.nix
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = [
     pkgs.home-manager
