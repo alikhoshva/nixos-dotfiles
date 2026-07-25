@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+# ARCHIVED: Legacy custom nh wrapper script.
+# This script was used as a workaround while using Determinate Nix due to daemon compatibility issues.
+# Now that the system has migrated to Lix, the official upstream `programs.nh` (Rust nh CLI) is enabled in
+# homeManagerModules/cli/nh.nix and this script has been archived.
+
 set -euo pipefail
 
 flake_dir="${NH_OS_FLAKE:-$HOME/nixos-dotfiles}"
