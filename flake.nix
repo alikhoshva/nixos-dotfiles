@@ -60,6 +60,7 @@
             inherit pkgs-unstable;
           };
           modules = [
+            { nixpkgs.pkgs = pkgs; }
             ./host/configuration.nix
             (inputs.import-tree ./nixosModules)
           ];

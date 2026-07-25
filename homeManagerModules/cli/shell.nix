@@ -5,6 +5,7 @@
     DEVENV_CACHIX_PUSH = "aleks-nixos-cache";
     XFT_DPI = "96";
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    STARSHIP_CONFIG = "$HOME/.config/starship/starship.toml";
   };
 
   programs.bash = {
