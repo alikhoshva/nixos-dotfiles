@@ -1,11 +1,11 @@
-{ lib, ... }: {
+{ config, lib, ... }: {
   home.sessionVariables = {
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
     SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gcr/ssh";
     DEVENV_CACHIX_PUSH = "aleks-nixos-cache";
     XFT_DPI = "96";
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-    STARSHIP_CONFIG = lib.mkForce "$HOME/.config/starship/starship.toml";
+    STARSHIP_CONFIG = lib.mkForce "${config.xdg.configHome}/starship/starship.toml";
   };
 
   programs.bash = {
@@ -17,6 +17,8 @@
       di = "devenv-init";
     };
     initExtra = ''
+      export STARSHIP_CONFIG="${config.xdg.configHome}/starship/starship.toml"
+
       function y() {
         local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
         command yazi "$@" --cwd-file="$tmp"
