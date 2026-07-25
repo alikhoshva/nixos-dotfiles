@@ -1,4 +1,4 @@
-{ inputs, pkgs-unstable, ... }:
+{ inputs, pkgs-unstable, nixSource ? ../.., ... }:
 
 {
   imports = [
@@ -14,8 +14,8 @@
     };
     users.aleks = {
       imports = [
-        ../../host/home.nix
-        (inputs.import-tree ../../homeManagerModules)
+        "${nixSource}/host/home.nix"
+        (inputs.import-tree "${nixSource}/homeManagerModules")
       ];
     };
   };
