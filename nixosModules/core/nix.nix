@@ -1,7 +1,9 @@
-{ inputs, pkgs, ... }: {
-  imports = [
-    inputs.determinate.nixosModules.default
-  ];
+{ pkgs, ... }: {
+  nix.package = pkgs.lix;
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    warn-dirty = false;
+  };
 
   nix.optimise.automatic = true;
 
