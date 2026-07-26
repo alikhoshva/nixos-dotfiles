@@ -81,3 +81,11 @@ hl.window_rule({
     size  = "monitor_w*0.25 monitor_h*0.25",
     move  = "monitor_w*0.74 monitor_h*0.05",
 })
+hl.layer_rule({
+    name = "noctalia",
+    match = { namespace = "^noctalia-.*$" },
+    no_anim = true,
+    ignore_alpha = 0.5,
+    blur = false,
+    blur_popups = false,
+}) 
