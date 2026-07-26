@@ -1,4 +1,4 @@
-{ inputs, pkgs-unstable, nixSource ? ../.., ... }:
+{ inputs, ... }:
 
 {
   imports = [
@@ -10,12 +10,11 @@
     useUserPackages = true;
     extraSpecialArgs = {
       inherit inputs;
-      inherit pkgs-unstable;
     };
     users.aleks = {
       imports = [
-        "${nixSource}/host/home.nix"
-        (inputs.import-tree "${nixSource}/homeManagerModules")
+        ../../host/home.nix
+        (inputs.import-tree ../../homeManagerModules)
       ];
     };
   };

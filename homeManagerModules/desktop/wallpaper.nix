@@ -1,4 +1,4 @@
-{ pkgs, pkgs-unstable, ... }:
+{ pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -6,6 +6,6 @@
     wofi
     pywal
     imagemagick
-    pkgs-unstable.awww
+    unstable.awww
   ];
 }

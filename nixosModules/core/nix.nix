@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   nix.package = pkgs.lix;
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
@@ -16,6 +16,14 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [
+    (final: prev: {
+      unstable = import inputs.nixpkgs-unstable {
+        system = prev.stdenv.hostPlatform.system;
+        config.allowUnfree = true;
+      };
+    })
+  ];
 
   environment.systemPackages = [
     pkgs.home-manager

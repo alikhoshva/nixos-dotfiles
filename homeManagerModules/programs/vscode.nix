@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-unstable,
   inputs,
   ...
 }:
@@ -14,10 +13,10 @@
 
   programs.vscode = {
     enable = true;
-    package = pkgs-unstable.vscode;
+    package = pkgs.unstable.vscode;
     mutableExtensionsDir = false;
     profiles.default = {
-      extensions = with pkgs-unstable.vscode-extensions; [
+      extensions = with pkgs.unstable.vscode-extensions; [
         # --- Themes & Icons ---
         pkief.material-icon-theme
 

@@ -36,20 +36,6 @@
     let
       system = "x86_64-linux";
       lib = inputs.nixpkgs.lib;
-      pkgs-unstable = import inputs.nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-      };
-
-      # Filter repository source to include only .nix files and config directory,
-      # preventing documentation/meta file edits from invalidating evaluation cache.
-      nixSource = lib.fileset.toSource {
-        root = ./.;
-        fileset = lib.fileset.unions [
-          (lib.fileset.fileFilter (file: file.hasExt "nix") ./.)
-          ./config
-        ];
-      };
     in
     {
       nixosConfigurations = {
@@ -57,12 +43,10 @@
           inherit system;
           specialArgs = {
             inherit inputs;
-            inherit pkgs-unstable;
-            inherit nixSource;
           };
           modules = [
-            "${nixSource}/host/configuration.nix"
-            (inputs.import-tree "${nixSource}/nixosModules")
+            ./host/configuration.nix
+            (inputs.import-tree ./nixosModules)
           ];
         };
       };

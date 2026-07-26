@@ -14,6 +14,7 @@ let
     wal = "wal";
     yazi = "yazi";
     starship = "starship";
+    noctalia = "noctalia";
   };
 in {
   xdg.configFile = builtins.mapAttrs (name: subpath: {
