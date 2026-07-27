@@ -3,6 +3,11 @@
         {
             "action": "mute",
             "pattern": "antigravity"
+        },
+        {
+            "action": "mute",
+            "pattern": "Antigravity"
         }
     ]
 }
+

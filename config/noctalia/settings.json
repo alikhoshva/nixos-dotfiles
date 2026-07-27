@@ -429,7 +429,7 @@
     "sounds": {
       "criticalSoundFile": "",
       "enabled": false,
-      "excludedApps": "discord,firefox,chrome,chromium,edge",
+      "excludedApps": "discord,firefox,chrome,chromium,edge,antigravity,Antigravity",
       "lowSoundFile": "",
       "normalSoundFile": "",
       "separateSounds": false,

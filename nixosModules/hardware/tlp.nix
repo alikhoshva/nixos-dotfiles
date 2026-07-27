@@ -23,9 +23,12 @@
       # ThinkPad Battery Health Protection
       START_CHARGE_THRESH_BAT0 = 60;
       STOP_CHARGE_THRESH_BAT0 = 95;
+      RESTORE_THRESH_AFTER_DETACH = 1; # Re-apply charge thresholds when AC is reconnected
 
-      # Power management for PCI Express and Wi-Fi
+      # Power management for PCI Express, Runtime PM, and Wi-Fi
       PCIE_ASPM_ON_BAT = "powersave";
+      RUNTIME_PM_ON_AC = "on";
+      RUNTIME_PM_ON_BAT = "auto";
       WIFI_PWR_ON_BAT = "on";
     };
   };
