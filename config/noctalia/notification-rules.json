@@ -1,13 +1,12 @@
 {
     "rules": [
         {
-            "action": "mute",
+            "action": "block",
             "pattern": "antigravity"
         },
         {
-            "action": "mute",
+            "action": "block",
             "pattern": "Antigravity"
         }
     ]
 }
-
