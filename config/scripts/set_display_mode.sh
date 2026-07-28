@@ -108,21 +108,24 @@ hyprctl eval "hl.env(\"HYPRCURSOR_SIZE\", \"$CURSOR_SIZE\") hl.env(\"XCURSOR_SIZ
 dbus-update-activation-environment --systemd HYPRCURSOR_SIZE="$CURSOR_SIZE" XCURSOR_SIZE="$CURSOR_SIZE" 2>/dev/null
 dconf write /org/gnome/desktop/interface/cursor-size "$CURSOR_SIZE" 2>/dev/null
 
-# 4. Set Hyprland Lua & DBus session environment variables for GTK/Qt/Elm
-hyprctl eval "hl.env(\"QT_SCALE_FACTOR\", \"$SCALE\") hl.env(\"GDK_SCALE\", \"1\") hl.env(\"ELM_SCALE\", \"$SCALE\")" 2>/dev/null
-dbus-update-activation-environment --systemd QT_SCALE_FACTOR="$SCALE" GDK_SCALE=1 ELM_SCALE="$SCALE" 2>/dev/null
+# 4. Chromium & Electron Flags (Vivaldi, Spotify, Vesktop, Obsidian)
+echo "--force-device-scale-factor=$SCALE" > ~/.config/vivaldi-flags.conf 2>/dev/null
+echo "--force-device-scale-factor=$SCALE" > ~/.config/electron-flags.conf 2>/dev/null
+echo "--force-device-scale-factor=$SCALE" > ~/.config/spotify-flags.conf 2>/dev/null
 
-# 5. Live GTK text scaling
-dconf write /org/gnome/desktop/interface/text-scaling-factor "$SCALE"
-
-# 6. Live X11/XWayland DPI calculation (Base 96 * SCALE)
+# 5. Live X11/XWayland DPI & GTK Text Calculation
 DPI=$(awk "BEGIN {print int($SCALE * 96 + 0.5)}")
 if command -v xrdb &> /dev/null; then
   echo "Xft.dpi: $DPI" | xrdb -merge
 fi
+dconf write /org/gnome/desktop/interface/text-scaling-factor "$SCALE"
 
-# 7. Restart Noctalia (quickshell) with updated Qt scale factor
+# 6. Multi-Toolkit Hyprland & DBus Session Environment Variables (GTK/Qt/Chromium/Xft/Cursor)
+hyprctl eval "hl.env(\"QT_AUTO_SCREEN_SCALE_FACTOR\", \"1\") hl.env(\"QT_SCALE_FACTOR\", \"$SCALE\") hl.env(\"GDK_SCALE\", \"$SCALE\") hl.env(\"CHROMIUM_USER_FLAGS\", \"--force-device-scale-factor=$SCALE\") hl.env(\"XFT_DPI\", \"$DPI\")" 2>/dev/null
+dbus-update-activation-environment --systemd QT_AUTO_SCREEN_SCALE_FACTOR=1 QT_SCALE_FACTOR="$SCALE" GDK_SCALE="$SCALE" CHROMIUM_USER_FLAGS="--force-device-scale-factor=$SCALE" XFT_DPI="$DPI" HYPRCURSOR_SIZE="$CURSOR_SIZE" XCURSOR_SIZE="$CURSOR_SIZE" 2>/dev/null
+
+# 7. Restart Noctalia (quickshell) with updated scale factor
 pkill -f quickshell 2>/dev/null
 pkill -f noctalia-shell 2>/dev/null
 sleep 0.5
-QT_SCALE_FACTOR="$SCALE" noctalia-shell &> /dev/null & disown
+QT_AUTO_SCREEN_SCALE_FACTOR=1 QT_SCALE_FACTOR="$SCALE" noctalia-shell &> /dev/null & disown

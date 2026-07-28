@@ -3,7 +3,6 @@
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
     SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gcr/ssh";
     DEVENV_CACHIX_PUSH = "aleks-nixos-cache";
-    XFT_DPI = "96";
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
     STARSHIP_CONFIG = lib.mkForce "${config.xdg.configHome}/starship/starship.toml";
   };
