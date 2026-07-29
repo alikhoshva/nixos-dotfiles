@@ -9,20 +9,31 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     #anipy-cli.url = "github:sdaqo/anipy-cli";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     noctalia = {
       url = "github:noctalia-dev/noctalia/legacy-v4";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nvim-config = {
-      url = "git+file:///home/aleks/Projects/Personal/nvim-config";
+      url = "path:/home/aleks/Projects/Personal/nvim-config";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.tree-sitter.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    elephant = {
+      url = "github:abenz1267/elephant";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    elephant.url = "github:abenz1267/elephant";
     walker = {
       url = "github:abenz1267/walker";
       inputs.elephant.follows = "elephant";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     antigravity-nix = {
       url = "github:jacopone/antigravity-nix";
