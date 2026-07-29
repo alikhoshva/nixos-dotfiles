@@ -172,11 +172,6 @@
           "editor.defaultFormatter" = "jnoortheen.nix-ide";
           "editor.formatOnSave" = true;
         };
-
-        # --- Dev Containers (Podman Integration) ---
-        "dev.containers.dockerPath" = "podman";
-        "dev.containers.dockerComposePath" = "podman-compose";
-        "dev.containers.runArgs" = [ "--userns=keep-id" ];
       };
     };
   };
