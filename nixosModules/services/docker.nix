@@ -1,6 +1,24 @@
 { pkgs, ... }: {
   # Enable common container config files in /etc/containers
   virtualisation.containers.enable = true;
+  environment.etc."containers/policy.json".text = ''
+    {
+      "default": [
+        {
+          "type": "insecureAcceptAnything"
+        }
+      ],
+      "transports": {
+        "docker-daemon": {
+          "": [
+            {
+              "type": "insecureAcceptAnything"
+            }
+          ]
+        }
+      }
+    }
+  '';
   virtualisation = {
     podman = {
       enable = true;

@@ -1,5 +1,6 @@
 { config, lib, ... }: {
   home.sessionVariables = {
+    DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/podman/podman.sock";
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
     SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gcr/ssh";
     DEVENV_CACHIX_PUSH = "aleks-nixos-cache";
