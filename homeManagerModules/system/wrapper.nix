@@ -10,7 +10,7 @@ let
     export XCURSOR_THEME="catppuccin-mocha-light-cursors"
     export HYPRCURSOR_THEME="catppuccin-mocha-light-cursors"
 
-    printf "Xft.dpi: %s\nXcursor.size: %s\nXcursor.theme: catppuccin-mocha-light-cursors\n" "$DPI" "$CURSOR_SIZE" | ${pkgs.xorg.xrdb}/bin/xrdb -merge 2>/dev/null
+    printf "Xft.dpi: %s\nXcursor.size: %s\nXcursor.theme: catppuccin-mocha-light-cursors\n" "$DPI" "$CURSOR_SIZE" | ${pkgs.xrdb}/bin/xrdb -merge 2>/dev/null
     exec "$1" --force-device-scale-factor="$SCALE" "''${@:2}"
   '';
 
@@ -21,7 +21,7 @@ let
   };
 in
 {
-  home.packages = [ scale-wrap pkgs.xorg.xrdb ];
+  home.packages = [ scale-wrap pkgs.xrdb ];
 
   xdg.desktopEntries = {
     vivaldi-stable  = mkScaledApp "Vivaldi" "vivaldi" "vivaldi" "Network";
