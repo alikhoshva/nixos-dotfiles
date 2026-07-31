@@ -1,85 +1,38 @@
-# AI Coding Agent Guidelines (AGENTS.md)
+# AI Coding Agent Guidelines (`.agents/AGENTS.md`)
 
-Welcome! This repository contains a clean, modular NixOS and Home Manager setup using Nix Flakes and the `nh` (Nix Helper) CLI. 
-
-To maintain the cleanliness and design of this codebase, you must follow the rules and guidelines detailed below.
+Welcome! This repository contains a clean, modular NixOS and Home Manager setup using Nix Flakes and the `nh` (Nix Helper) CLI.
 
 ---
 
-## 1. Repository Structure & Directory Map
-
-Before making edits, locate the proper place for your changes:
+## 1. Repository Structure & Map
 
 ```
 nixos-dotfiles/
-├── host/
-│   ├── configuration.nix         # Minimal NixOS system profile entrypoint
-│   └── home.nix                  # Minimal Home Manager user profile entrypoint
-│
-├── nixosModules/                 # System-wide NixOS configurations
-│   ├── default.nix               # Combines and imports all system categories
-│   ├── core/                     # Core system settings (locale, users, core packages, security)
-│   ├── hardware/                 # Hardware configurations (boot, audio, bluetooth, power management)
-│   ├── services/                 # Background system services (networking, virtualization, printing)
-│   └── programs/                 # System-level GUI & gaming applications
-│
-├── homeManagerModules/           # User-space configurations (Home Manager)
-│   ├── default.nix               # Combines and imports all user categories
-│   ├── cli/                      # CLI tools, shells, git/ssh configs, and developer helpers
-│   ├── desktop/                  # Desktop environment styling, themes, app launchers, and symlinks
-│   ├── programs/                 # User GUI applications (browsers, editors, media players)
-│   └── system/                   # User system libraries, unstable packages, and manual settings
-│
-└── config/                       # Raw dotfiles
-    └── (Waybar, Hyprland, etc. symlinked to ~/.config/ via homeManagerModules/desktop/symlinks.nix)
+├── host/                         # Minimal entrypoints (configuration.nix, home.nix)
+├── nixosModules/                 # System NixOS configurations (core, hardware, services, programs)
+├── homeManagerModules/           # User space configurations (cli, desktop, programs, system)
+├── config/                       # Raw dotfiles (Hyprland, Waybar, Noctalia, Kitty, etc.)
+└── .agents/                      # Agent architecture (skills, knowledge, scripts, logs)
 ```
+*(For deep architectural breakdown and dotfile mappings, see [.agents/knowledge/nix-architecture.md](file:///.agents/knowledge/nix-architecture.md) and [.agents/knowledge/dotfiles-matrix.md](file:///.agents/knowledge/dotfiles-matrix.md)).*
 
 ---
 
-## 2. Coding Guidelines & Philosophy
+## 2. Core Invariant Rules
 
-### Keep Profiles Minimal
-- `host/configuration.nix` and `host/home.nix` are **strictly minimal entrypoints**. 
-- They must only contain profile metadata (e.g. `system.stateVersion`, `home.username`) and imports of category default modules. Do **not** write raw packages, aliases, or service configuration inside them.
-
-### Lean Module Philosophy (No Options Boilerplate)
-- Avoid defining complex Nix options schemas (i.e. `options` and `lib.mkIf config.xxx.enable`) unless the user explicitly requests support for multi-host setups.
-- Use **file-based module splitting** instead. Simply group settings into dedicated Nix files (e.g. `nixosModules/hardware/audio.nix`) and add them to their parent `default.nix` imports.
-
-### Self-Contained Dependency Bundling
-- When adding a tool or background daemon, keep all related components together.
-- *Example*: Bundle the `tuigreet` package in `services/greeter.nix` alongside the `services.greetd` settings, rather than spreading packages across a global `environment.systemPackages` list.
+1. **Minimal Entrypoints**: `host/configuration.nix` and `host/home.nix` are strictly minimal entrypoints containing metadata and category imports. Do **not** put raw packages or inline configs here.
+2. **Dynamic Tree Importing**: All modules inside `nixosModules/` and `homeManagerModules/` are dynamically imported via `inputs.import-tree`. Do not write `default.nix` files; simply add dedicated Nix files (e.g. `nixosModules/hardware/audio.nix`) and stage them with Git (`git add`). Avoid complex `options` schemas unless multi-host is requested.
+3. **Self-Contained Bundling**: Keep related components (daemons, packages, dotfiles) bundled together within their dedicated module.
+4. **Git Staging Requirement**: Nix Flakes ignore untracked Git files. Always stage new files (`git add <file>`) before running Nix evaluation or build commands.
 
 ---
 
-## 3. Mandatory Development Workflow
+## 3. Workflow & Verification Entrypoints
 
-### 1. Stage New Files Immediately
-Nix Flakes are Git-aware and will ignore files that are not tracked. When you create new files, you **MUST** run:
-```bash
-git add <newfile>  # or git add .
-```
-before running any nix commands, otherwise Nix will throw an "uncommitted/no file found" error.
-
-### 2. Mandatory Local Verification
-Do not report success or ask the user to switch configurations without testing your changes first. Home Manager is integrated directly as a NixOS module (`nixosModules/core/home-manager.nix`), so system and user configurations are evaluated together. You must run:
-- **Flake syntax evaluation**:
+- **Module Editing**: When creating or editing modules, activate the `nix-module-workflow` skill ([.agents/skills/nix-module-workflow/SKILL.md](file:///.agents/skills/nix-module-workflow/SKILL.md)).
+- **Desktop Dotfiles**: When editing desktop dotfiles under `config/`, activate the `dotfiles-symlink-manager` skill ([.agents/skills/dotfiles-symlink-manager/SKILL.md](file:///.agents/skills/dotfiles-symlink-manager/SKILL.md)).
+- **Verification & Testing**: Never report success without testing. Execute the fast, log-filtered verification script:
   ```bash
-  nix flake check
+  .agents/scripts/verify.sh
   ```
-- **Unified system & home evaluation dry-run**:
-  ```bash
-  nh os switch --dry
-  ```
-
-### 3. Git Branching
-- Perform all development tasks on a separate feature branch for significant changes (e.g. affecting more than 2 files). For minor edits (2 files or fewer), you may work directly on the `main` branch. Do not commit edits directly to `main` for large tasks.
-
----
-
-## 4. Context & Token Optimization (Scan Efficiency)
-
-To keep evaluations fast and context usage low, follow these guidelines:
-- **Pinpoint, don't scan**: Use the modular directory map to target and open *only* the specific file relevant to the task (e.g., open `hardware/audio.nix` for sound problems).
-- **Ignore unrelated configs**: If a file is named `tlp.nix` and the current task is unrelated to battery or power management, do **not** view or read it.
-- **Avoid reading massive files**: Refrain from reading large configuration files (such as `noctalia.nix` which contains 600+ lines) unless the task explicitly requires editing them.
+  *(Full output is logged to `.agents/logs/last_verify.log`; stdout outputs concise success or filtered error traces).*

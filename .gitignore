@@ -11,6 +11,5 @@ result-*
 .idea/
 .vscode/
 
-# OS metadata
-.DS_Store
-Thumbs.db
+# Agent temporary logs
+.agents/logs/
