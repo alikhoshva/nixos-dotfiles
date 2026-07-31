@@ -6,9 +6,6 @@
     hyprlock
     hypridle
     hyprpolkitagent
-    waybar
-
-    wlogout
     networkmanagerapplet
     seahorse
 

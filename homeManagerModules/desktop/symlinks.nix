@@ -4,11 +4,9 @@ let
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   # Standard .config/directory
   configs = {
-    waybar = "waybar";
     wofi = "wofi";
     hypr = "hypr";
     scripts = "scripts";
-    wlogout = "wlogout";
     kitty = "kitty";
     Thunar = "Thunar";
     wal = "wal";

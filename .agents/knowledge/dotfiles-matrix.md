@@ -19,8 +19,15 @@ This document maps raw user dotfile configurations under `config/` to their targ
 | `config/yazi` | `~/.config/yazi` | `homeManagerModules/desktop/symlinks.nix` | Yazi terminal file manager configuration |
 | `config/wal` | `~/.config/wal` | `homeManagerModules/desktop/symlinks.nix` | Pywal color scheme templates & themes |
 | `config/Thunar` | `~/.config/Thunar` | `homeManagerModules/desktop/symlinks.nix` | Thunar file manager settings |
-| `config/scripts` | `~/.config/scripts` | `homeManagerModules/desktop/symlinks.nix` | Helper desktop scripts (screenshot, picker, etc.) |
+| `config/scripts` | `~/.config/scripts` | `homeManagerModules/desktop/symlinks.nix` | Active desktop scripts (`set_display_mode.sh`, `toggle-mic.sh`, `update-mic-led.sh`, `wallpaper.sh`) |
 | `config/assets` | `~/.config/assets` | `homeManagerModules/desktop/symlinks.nix` | Static assets, wallpapers, icons |
+
+---
+
+## Repository Archive Policy
+
+Inactive, superseded, or deprecated dotfiles and scripts are stored in the top-level [`archive/`](file:///home/aleks/nixos-dotfiles/archive) directory.
+See [`archive/README.md`](file:///home/aleks/nixos-dotfiles/archive/README.md) for the catalog of archived items and restoration instructions.
 
 ---
 
@@ -29,3 +36,4 @@ This document maps raw user dotfile configurations under `config/` to their targ
 1. **Edit Raw Configs Directly**: Make edits inside `config/<app>/...` rather than modifying `~/.config/` directly.
 2. **Symlink Registration**: If adding a brand new application dotfile directory inside `config/`, register the symlink target in `homeManagerModules/desktop/symlinks.nix` using Home Manager's `xdg.configFile` or `home.file`.
 3. **Stage Changes**: Remember to `git add config/<app>` so Nix Flakes pick up new files during evaluation.
+
