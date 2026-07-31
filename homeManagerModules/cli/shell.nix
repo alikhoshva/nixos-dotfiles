@@ -9,9 +9,7 @@
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
     HYPRCURSOR_THEME = "catppuccin-mocha-light-cursors";
-    HYPRCURSOR_SIZE = "24";
     XCURSOR_THEME = "catppuccin-mocha-light-cursors";
-    XCURSOR_SIZE = "24";
     STARSHIP_CONFIG = lib.mkForce "${config.xdg.configHome}/starship/starship.toml";
   };
 
@@ -24,31 +22,31 @@
       di = "devenv-init";
     };
     initExtra = ''
-      export STARSHIP_CONFIG="${config.xdg.configHome}/starship/starship.toml"
+            export STARSHIP_CONFIG="${config.xdg.configHome}/starship/starship.toml"
 
-      function y() {
-        local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-        command yazi "$@" --cwd-file="$tmp"
-        IFS= read -r -d ''' cwd < "$tmp"
-        [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
-        rm -f -- "$tmp"
-      } 
+            function y() {
+              local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+              command yazi "$@" --cwd-file="$tmp"
+              IFS= read -r -d ''' cwd < "$tmp"
+              [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+              rm -f -- "$tmp"
+            } 
 
-      function devenv-init() {
-        devenv init
-        cat << \EOF > .envrc
-#!/usr/bin/env bash
+            function devenv-init() {
+              devenv init
+              cat << \EOF > .envrc
+      #!/usr/bin/env bash
 
-eval "$(devenv direnvrc)"
+      eval "$(devenv direnvrc)"
 
-# You can pass flags to the devenv command
-# For example: use devenv --impure --option services.postgres.enable:bool true
-use devenv
-EOF
-        direnv allow
-      }
+      # You can pass flags to the devenv command
+      # For example: use devenv --impure --option services.postgres.enable:bool true
+      use devenv
+      EOF
+              direnv allow
+            }
 
-      eval "$(devenv hook bash)"
+            eval "$(devenv hook bash)"
     '';
   };
 }
