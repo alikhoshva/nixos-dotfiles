@@ -3,7 +3,15 @@
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
     SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gcr/ssh";
     DEVENV_CACHIX_PUSH = "aleks-nixos-cache";
+    QT_QPA_PLATFORM = "wayland;xcb";
+    QT_QPA_PLATFORMTHEME = "gtk3";
+    QT_STYLE_OVERRIDE = "gtk3";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+    HYPRCURSOR_THEME = "catppuccin-mocha-light-cursors";
+    HYPRCURSOR_SIZE = "24";
+    XCURSOR_THEME = "catppuccin-mocha-light-cursors";
+    XCURSOR_SIZE = "24";
     STARSHIP_CONFIG = lib.mkForce "${config.xdg.configHome}/starship/starship.toml";
   };
 

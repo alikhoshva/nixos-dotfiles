@@ -1,9 +1,9 @@
 { pkgs, ... }: {
-  # Enable the Hyprland window manager with UWSM session management
+  # Enable the Hyprland window manager without UWSM session management
   programs.hyprland = {
     enable = true;
     package = pkgs.unstable.hyprland;
-    withUWSM = true;
+    withUWSM = false;
   };
 }
 
