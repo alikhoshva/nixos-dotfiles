@@ -32,6 +32,27 @@ for file in $NIX_FILES; do
             grep -Hn 'extraConfig = "";' "$file"
             BLOAT_FOUND=1
         fi
+
+        # Check for empty settings = {};
+        if grep -Hn 'settings = {};' "$file" >/dev/null 2>&1; then
+            echo "[WARNING] Redundant empty attribute set 'settings = {};' found in $file:"
+            grep -Hn 'settings = {};' "$file"
+            BLOAT_FOUND=1
+        fi
+
+        # Check for empty packages = [];
+        if grep -Hn 'packages = \[\];' "$file" >/dev/null 2>&1; then
+            echo "[WARNING] Redundant empty list 'packages = [];' found in $file:"
+            grep -Hn 'packages = \[\];' "$file"
+            BLOAT_FOUND=1
+        fi
+
+        # Check for legacy 'with pkgs;' scope pollution
+        if grep -Hn 'with pkgs;' "$file" >/dev/null 2>&1; then
+            echo "[WARNING] Anti-pattern 'with pkgs;' found in $file (use explicit pkgs. naming):"
+            grep -Hn 'with pkgs;' "$file"
+            BLOAT_FOUND=1
+        fi
     fi
 done
 

@@ -13,14 +13,18 @@ Use this skill whenever code modifications need evaluation or pre-commit verific
    Running raw `nix flake check` or `nh os switch` directly produces massive stdout logs that bloat chat history with input tokens.
 
 2. **Execute the Verification Helper Script**:
-   Run:
-   ```bash
-   .agents/scripts/verify.sh
-   ```
+   - For rapid syntax validation (<100ms):
+     ```bash
+     .agents/scripts/verify.sh --fast
+     ```
+   - For full evaluation & switch dry-run:
+     ```bash
+     .agents/scripts/verify.sh
+     ```
    - Automatically detects untracked `.nix` files and stages them.
-   - Runs `nix flake check`.
-   - Runs `nh os switch --dry`.
-   - Offloads raw stdout/stderr to `.agents/logs/last_verify.log`.
+   - Runs pre-flight `nix-instantiate --parse` syntax check across all `.nix` files.
+   - Runs `nix flake check` and `nh os switch --dry`.
+   - Offloads raw stdout/stderr to [.agents/logs/last_verify.log](file:///.agents/logs/last_verify.log).
 
 3. **Interpreting Results**:
    - If success: A concise 3-line success summary is printed.

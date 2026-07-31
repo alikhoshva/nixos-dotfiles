@@ -12,11 +12,35 @@ echo "=== Verification Run: $(date) ===" > "$LOG_FILE"
 
 cd "$REPO_DIR"
 
+FAST_MODE="${1:-}"
+
 # 1. Static Anti-Bloat Check
 echo "--- Running Anti-Bloat Check ---" >> "$LOG_FILE"
 "$SCRIPT_DIR/check-bloat.sh" >> "$LOG_FILE" 2>&1 || true
 
-# 2. Check for untracked Nix files
+# 2. Pre-flight Syntax Parsing (<50ms)
+echo "--- Running Pre-flight Nix Syntax Parsing ---" >> "$LOG_FILE"
+SYNTAX_ERRORS=0
+for nix_file in $(find host nixosModules homeManagerModules -name "*.nix" 2>/dev/null); do
+    if ! nix-instantiate --parse "$nix_file" >/dev/null 2>&1; then
+        echo "[FAIL] Syntax error in $nix_file" | tee -a "$LOG_FILE"
+        nix-instantiate --parse "$nix_file" 2>&1 | tee -a "$LOG_FILE"
+        SYNTAX_ERRORS=1
+    fi
+done
+
+if [ "$SYNTAX_ERRORS" -ne 0 ]; then
+    echo "Full log saved to: .agents/logs/last_verify.log"
+    exit 1
+fi
+echo "[OK] All .nix files parsed cleanly."
+
+if [ "$FAST_MODE" = "--fast" ] || [ "$FAST_MODE" = "-f" ]; then
+    echo "=== Verification Result: FAST PASS (<100ms) ==="
+    exit 0
+fi
+
+# 3. Check for untracked Nix files
 UNTRACKED=$(git status --porcelain | grep '^??.*\.nix$' || true)
 if [ -n "$UNTRACKED" ]; then
     echo "[WARNING] Untracked Nix files detected! Nix Flakes will ignore them until staged:" >> "$LOG_FILE"
