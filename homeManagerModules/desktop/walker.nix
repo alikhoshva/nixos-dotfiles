@@ -7,12 +7,12 @@
 
   programs.elephant = {
     enable = true;
-    installService = false;
+    installService = true;
   };
 
   programs.walker = {
     enable = true;
-    runAsService = false;
+    runAsService = true;
   };
 
   # Override Walker module's generated config files with our out-of-store symlinks
