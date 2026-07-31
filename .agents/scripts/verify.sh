@@ -12,7 +12,11 @@ echo "=== Verification Run: $(date) ===" > "$LOG_FILE"
 
 cd "$REPO_DIR"
 
-# 1. Check for untracked Nix files
+# 1. Static Anti-Bloat Check
+echo "--- Running Anti-Bloat Check ---" >> "$LOG_FILE"
+"$SCRIPT_DIR/check-bloat.sh" >> "$LOG_FILE" 2>&1 || true
+
+# 2. Check for untracked Nix files
 UNTRACKED=$(git status --porcelain | grep '^??.*\.nix$' || true)
 if [ -n "$UNTRACKED" ]; then
     echo "[WARNING] Untracked Nix files detected! Nix Flakes will ignore them until staged:" >> "$LOG_FILE"
@@ -21,7 +25,7 @@ if [ -n "$UNTRACKED" ]; then
     git add $UNTRACKED
 fi
 
-# 2. Run nix flake check
+# 3. Run nix flake check
 echo "--- Running nix flake check ---" >> "$LOG_FILE"
 if ! nix flake check --extra-experimental-features 'nix-command flakes' >> "$LOG_FILE" 2>&1; then
     echo "[FAIL] nix flake check failed. Error summary:"
@@ -31,7 +35,7 @@ if ! nix flake check --extra-experimental-features 'nix-command flakes' >> "$LOG
 fi
 echo "[OK] nix flake check passed cleanly."
 
-# 3. Run dry-run switch / unified evaluation check
+# 4. Run dry-run switch / unified evaluation check
 echo "--- Running nh os switch --dry ---" >> "$LOG_FILE"
 if command -v nh >/dev/null 2>&1; then
     if ! nh os switch --dry >> "$LOG_FILE" 2>&1; then
