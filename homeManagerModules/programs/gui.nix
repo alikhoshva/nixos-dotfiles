@@ -62,7 +62,10 @@
     Unit = {
       Description = "Hyprland session";
       BindsTo = [ "graphical-session.target" ];
-      Wants = [ "graphical-session-pre.target" ];
+      Wants = [
+        "graphical-session.target"
+        "graphical-session-pre.target"
+      ];
       After = [ "graphical-session-pre.target" ];
       PropagatesStopTo = [ "graphical-session.target" ];
     };

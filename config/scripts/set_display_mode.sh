@@ -123,16 +123,16 @@ for gtk_file in ~/.config/gtk-3.0/settings.ini ~/.config/gtk-4.0/settings.ini; d
   fi
 done
 
-# 4. Live X11/XWayland DPI, Xcursor & GTK Text Calculation
+# 4. Live X11/XWayland DPI & Xcursor Calculation
 DPI=$(awk "BEGIN {print int($SCALE * 96 + 0.5)}")
 if command -v xrdb &> /dev/null; then
   printf "Xft.dpi: %s\nXcursor.size: %s\nXcursor.theme: catppuccin-mocha-light-cursors\n" "$DPI" "$CURSOR_SIZE" | xrdb -merge
 fi
-dconf write /org/gnome/desktop/interface/text-scaling-factor "$SCALE"
+dconf write /org/gnome/desktop/interface/text-scaling-factor "$SCALE" 2>/dev/null
 
-# 5. Multi-Toolkit Hyprland & DBus Session Environment Variables (GTK/Qt/Chromium/Electron/Xft/Cursor)
-hyprctl eval "hl.env(\"QT_AUTO_SCREEN_SCALE_FACTOR\", \"0\") hl.env(\"QT_ENABLE_HIGHDPI_SCALING\", \"1\") hl.env(\"QT_SCALE_FACTOR\", \"$SCALE\") hl.env(\"QT_SCALE_FACTOR_ROUNDING_POLICY\", \"PassThrough\") hl.env(\"GDK_SCALE\", \"1\") hl.env(\"GDK_DPI_SCALE\", \"$SCALE\") hl.env(\"CHROMIUM_USER_FLAGS\", \"--force-device-scale-factor=$SCALE\") hl.env(\"ELECTRON_EXTRA_LAUNCH_ARGS\", \"--force-device-scale-factor=$SCALE\") hl.env(\"XFT_DPI\", \"$DPI\")" 2>/dev/null
-dbus-update-activation-environment --systemd QT_AUTO_SCREEN_SCALE_FACTOR=0 QT_ENABLE_HIGHDPI_SCALING=1 QT_SCALE_FACTOR="$SCALE" QT_SCALE_FACTOR_ROUNDING_POLICY="PassThrough" GDK_SCALE=1 GDK_DPI_SCALE="$SCALE" CHROMIUM_USER_FLAGS="--force-device-scale-factor=$SCALE" ELECTRON_EXTRA_LAUNCH_ARGS="--force-device-scale-factor=$SCALE" XFT_DPI="$DPI" HYPRCURSOR_SIZE="$CURSOR_SIZE" XCURSOR_SIZE="$CURSOR_SIZE" 2>/dev/null
+# 5. Multi-Toolkit Hyprland & DBus Session Environment Variables (GTK/Qt/Xft/Cursor)
+hyprctl eval "hl.env(\"QT_AUTO_SCREEN_SCALE_FACTOR\", \"0\") hl.env(\"QT_ENABLE_HIGHDPI_SCALING\", \"1\") hl.env(\"QT_SCALE_FACTOR\", \"$SCALE\") hl.env(\"QT_SCALE_FACTOR_ROUNDING_POLICY\", \"PassThrough\") hl.env(\"GDK_SCALE\", \"1\") hl.env(\"GDK_DPI_SCALE\", \"1\") hl.env(\"XFT_DPI\", \"$DPI\")" 2>/dev/null
+dbus-update-activation-environment --systemd QT_AUTO_SCREEN_SCALE_FACTOR=0 QT_ENABLE_HIGHDPI_SCALING=1 QT_SCALE_FACTOR="$SCALE" QT_SCALE_FACTOR_ROUNDING_POLICY="PassThrough" GDK_SCALE=1 GDK_DPI_SCALE=1 XFT_DPI="$DPI" HYPRCURSOR_SIZE="$CURSOR_SIZE" XCURSOR_SIZE="$CURSOR_SIZE" 2>/dev/null
 
 # 6. Restart Noctalia (quickshell) with updated scale factor
 pkill -f quickshell 2>/dev/null

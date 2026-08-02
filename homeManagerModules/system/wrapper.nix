@@ -21,12 +21,17 @@ let
   };
 in
 {
-  home.packages = [ scale-wrap pkgs.xrdb ];
+  home.packages = [
+    scale-wrap
+    pkgs.xrdb
+  ];
 
   xdg.desktopEntries = {
-    vivaldi-stable  = mkScaledApp "Vivaldi" "vivaldi" "vivaldi" "Network";
-    spotify         = mkScaledApp "Spotify" "spotify" "spotify-client" "Audio";
-    code            = mkScaledApp "Visual Studio Code" "code" "vscode" "Development";
-    antigravity-ide = mkScaledApp "Google Antigravity IDE" "antigravity-ide" "antigravity-ide" "Development";
+    vivaldi-stable = mkScaledApp "Vivaldi" "vivaldi" "vivaldi" "Network";
+    spotify = mkScaledApp "Spotify" "spotify" "spotify-client" "Audio";
+    code = mkScaledApp "Visual Studio Code" "code" "vscode" "Development";
+    antigravity-ide =
+      mkScaledApp "Google Antigravity IDE" "antigravity-ide" "antigravity-ide"
+        "Development";
   };
 }
