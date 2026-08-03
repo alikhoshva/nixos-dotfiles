@@ -31,6 +31,7 @@
         temurin-bin-25
       ];
     })
+    ftb-app
     # Desktop Utilities
     grim
     slurp
