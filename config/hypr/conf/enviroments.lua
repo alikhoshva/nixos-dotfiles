@@ -10,6 +10,11 @@ hl.env("QT_QPA_PLATFORMTHEME", "gtk3")
 hl.env("QT_STYLE_OVERRIDE", "gtk3")
 hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
 
+-- Ozone / Native Wayland for Electron & Chromium
+hl.env("NIXOS_OZONE_WL", "1")
+hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
+hl.env("OZONE_PLATFORM", "wayland")
+
 -- Disable appimage launcher by default
 hl.env("APPIMAGELAUNCHER_DISABLE", "1")
 

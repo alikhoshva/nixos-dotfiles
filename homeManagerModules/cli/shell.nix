@@ -1,6 +1,8 @@
 { config, lib, ... }: {
   home.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
+    OZONE_PLATFORM = "wayland";
     SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/gcr/ssh";
     DEVENV_CACHIX_PUSH = "aleks-nixos-cache";
     QT_QPA_PLATFORM = "wayland;xcb";
