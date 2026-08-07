@@ -98,7 +98,12 @@ CURSOR_SIZE=24
 CURSOR_THEME="catppuccin-mocha-light-cursors"
 
 hyprctl setcursor "$CURSOR_THEME" "$CURSOR_SIZE" 2>/dev/null
+hyprctl eval "hl.env(\"HYPRCURSOR_THEME\", \"$CURSOR_THEME\") hl.env(\"HYPRCURSOR_SIZE\", \"$CURSOR_SIZE\") hl.env(\"XCURSOR_THEME\", \"$CURSOR_THEME\") hl.env(\"XCURSOR_SIZE\", \"$CURSOR_SIZE\")" 2>/dev/null
 dbus-update-activation-environment --systemd HYPRCURSOR_THEME="$CURSOR_THEME" HYPRCURSOR_SIZE="$CURSOR_SIZE" XCURSOR_THEME="$CURSOR_THEME" XCURSOR_SIZE="$CURSOR_SIZE" 2>/dev/null
+
+if command -v xrdb &> /dev/null; then
+  printf "Xcursor.size: %s\nXcursor.theme: %s\n" "$CURSOR_SIZE" "$CURSOR_THEME" | xrdb -merge 2>/dev/null
+fi
 
 # 2.5 Save scale factor for application wrappers
 mkdir -p ~/.config

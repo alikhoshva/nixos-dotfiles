@@ -33,6 +33,7 @@
     })
     ftb-app
     # Desktop Utilities
+    xorg.xrdb
     grim
     slurp
     swappy
