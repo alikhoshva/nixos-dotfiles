@@ -11,7 +11,6 @@
 
     # GUI Applications
     vivaldi
-    spotify
     kitty
     #google-chrome
     xarchiver
