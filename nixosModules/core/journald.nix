@@ -4,4 +4,6 @@
     SystemMaxFileSize=100M
     MaxRetentionSec=1month
   '';
+
+  systemd.coredump.enable = false;
 }
