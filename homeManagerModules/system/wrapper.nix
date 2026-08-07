@@ -21,8 +21,6 @@ in
     antigravity-ide =
       mkScaledApp "Google Antigravity IDE" "antigravity-ide" "antigravity-ide"
         "Development";
-    obsidian = mkScaledApp "Obsidian" "obsidian" "obsidian" "Office";
     ftb-app = mkScaledApp "FTB App" "ftb-app" "ftb-app" "Game";
-    Zoom = mkScaledApp "Zoom" "zoom" "Zoom" "Network";
   };
 }
