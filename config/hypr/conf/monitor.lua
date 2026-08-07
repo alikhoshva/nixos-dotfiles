@@ -14,7 +14,7 @@ hl.monitor({
     output   = "HDMI-A-1",
     mode     = "3840x2160@120",
     position = "1920x0",
-    scale    = 1,
+    scale    = 1.5,
     vrr      = 1,
 })
 
@@ -26,8 +26,3 @@ hl.monitor({
     scale    = 1,
 })
 
-hl.config({
-    xwayland = {
-        force_zero_scaling = true,
-    }
-})

@@ -7,7 +7,6 @@
     QT_QPA_PLATFORMTHEME = "gtk3";
     QT_STYLE_OVERRIDE = "gtk3";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
     HYPRCURSOR_THEME = "catppuccin-mocha-light-cursors";
     XCURSOR_THEME = "catppuccin-mocha-light-cursors";
     STARSHIP_CONFIG = lib.mkForce "${config.xdg.configHome}/starship/starship.toml";

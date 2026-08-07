@@ -3,7 +3,7 @@
 ---------------------
 
 -- Set programs that you use
-local terminal    = "bash -c 'kitty -o font_size=${KITTY_FONT_SIZE:-12}'"
+local terminal    = "kitty"
 local fileManager = "thunar"
 --local menu        = 'bash -c "pkill wofi; wofi --show drun --conf ~/.config/wofi/config.conf --style ~/.config/wofi/style.css"'
 local menu        = "walker"
