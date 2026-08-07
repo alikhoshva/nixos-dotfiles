@@ -52,7 +52,7 @@ if [[ -n "$PRESET" ]]; then
     desktop-4k)
       OUTPUT="HDMI-A-1"
       MODE="3840x2160@120"
-      SCALE="1.4"
+      SCALE="1.333333"
       POSITION="0x0"
       DISABLE="eDP-1"
       ;;
