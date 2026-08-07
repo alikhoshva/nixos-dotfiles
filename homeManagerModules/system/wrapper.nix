@@ -17,9 +17,13 @@ in
   xdg.desktopEntries = {
     vivaldi-stable = mkScaledApp "Vivaldi" "vivaldi" "vivaldi" "Network";
     vesktop = mkScaledApp "Vesktop" "vesktop" "vesktop" "Network";
+    spotify = mkScaledApp "Spotify" "spotify" "spotify-client" "Audio";
     code = mkScaledApp "Visual Studio Code" "code" "vscode" "Development";
     antigravity-ide =
       mkScaledApp "Google Antigravity IDE" "antigravity-ide" "antigravity-ide"
         "Development";
+    obsidian = mkScaledApp "Obsidian" "obsidian" "obsidian" "Office";
+    ftb-app = mkScaledApp "FTB App" "ftb-app" "ftb-app" "Game";
+    Zoom = mkScaledApp "Zoom" "zoom" "Zoom" "Network";
   };
 }
