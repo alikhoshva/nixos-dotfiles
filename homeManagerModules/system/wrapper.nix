@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   scale-wrap = pkgs.writeShellScriptBin "scale-wrap" ''
-    SCALE=$(cat "$HOME/.config/ui_scale" 2>/dev/null || echo 1.5)
+    SCALE=$(cat "$HOME/.config/ui_scale" 2>/dev/null || echo 1.25)
     exec "$1" --force-device-scale-factor="$SCALE" "''${@:2}"
   '';
 
