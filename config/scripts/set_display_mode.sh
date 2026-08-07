@@ -6,7 +6,7 @@
 
 OUTPUT="HDMI-A-1"
 MODE="3840x2160@120"
-SCALE="1.5"
+SCALE="1.333333"
 POSITION="0x0"
 DISABLE="eDP-1"
 PRESET=""
@@ -82,9 +82,9 @@ fi
 
 # 1. Hyprland Monitor Scaling
 if [[ "$DUAL_MODE" == true ]]; then
-  hyprctl eval 'hl.monitor({ output = "eDP-1", mode = "1920x1200@60", position = "0x0", scale = 1, disabled = false }) hl.monitor({ output = "HDMI-A-1", mode = "3840x2160@120", position = "1920x0", scale = 1.5, disabled = false })' 2>/dev/null || {
+  hyprctl eval 'hl.monitor({ output = "eDP-1", mode = "1920x1200@60", position = "0x0", scale = 1, disabled = false }) hl.monitor({ output = "HDMI-A-1", mode = "3840x2160@120", position = "1920x0", scale = 1, disabled = false })' 2>/dev/null || {
     hyprctl keyword monitor "eDP-1, 1920x1200@60, 0x0, 1"
-    hyprctl keyword monitor "HDMI-A-1, 3840x2160@120, 1920x0, 1.5"
+    hyprctl keyword monitor "HDMI-A-1, 3840x2160@120, 1920x0, 1"
   }
 else
   hyprctl eval "hl.monitor({ output = \"$DISABLE\", disabled = true }) hl.monitor({ output = \"$OUTPUT\", mode = \"$MODE\", position = \"$POSITION\", scale = $SCALE, disabled = false })" 2>/dev/null || {
