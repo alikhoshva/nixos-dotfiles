@@ -93,28 +93,28 @@ else
   }
 fi
 
-# 2. Dynamic Cursor Theme & Size Calculation (Base 24px * SCALE)
-CURSOR_SIZE=$(awk "BEGIN {print int(24 * $SCALE + 0.5)}")
-CURSOR_THEME="catppuccin-mocha-light-cursors"
-
-hyprctl setcursor "$CURSOR_THEME" "$CURSOR_SIZE" 2>/dev/null
-hyprctl eval "hl.env(\"HYPRCURSOR_THEME\", \"$CURSOR_THEME\") hl.env(\"HYPRCURSOR_SIZE\", \"$CURSOR_SIZE\") hl.env(\"XCURSOR_THEME\", \"$CURSOR_THEME\") hl.env(\"XCURSOR_SIZE\", \"$CURSOR_SIZE\")" 2>/dev/null
-dbus-update-activation-environment --systemd HYPRCURSOR_THEME="$CURSOR_THEME" HYPRCURSOR_SIZE="$CURSOR_SIZE" XCURSOR_THEME="$CURSOR_THEME" XCURSOR_SIZE="$CURSOR_SIZE" 2>/dev/null
-dconf write /org/gnome/desktop/interface/cursor-size "$CURSOR_SIZE" 2>/dev/null
-
-if command -v xrdb &> /dev/null; then
-  printf "Xcursor.size: %s\nXcursor.theme: %s\n" "$CURSOR_SIZE" "$CURSOR_THEME" | xrdb -merge 2>/dev/null
-fi
-
-for gtk_file in ~/.config/gtk-3.0/settings.ini ~/.config/gtk-4.0/settings.ini; do
-  if [[ -f "$gtk_file" && -w "$gtk_file" && ! -L "$gtk_file" ]]; then
-    if grep -q "gtk-cursor-theme-size" "$gtk_file"; then
-      sed -i "s/gtk-cursor-theme-size=.*/gtk-cursor-theme-size=$CURSOR_SIZE/" "$gtk_file" 2>/dev/null
-    else
-      echo "gtk-cursor-theme-size=$CURSOR_SIZE" >> "$gtk_file" 2>/dev/null
-    fi
-  fi
-done
+# 2. Fixed Cursor Theme & Size (24px) - Disabled for testing
+# CURSOR_SIZE=24
+# CURSOR_THEME="catppuccin-mocha-light-cursors"
+# 
+# hyprctl setcursor "$CURSOR_THEME" "$CURSOR_SIZE" 2>/dev/null
+# hyprctl eval "hl.env(\"HYPRCURSOR_THEME\", \"$CURSOR_THEME\") hl.env(\"HYPRCURSOR_SIZE\", \"24\") hl.env(\"XCURSOR_THEME\", \"$CURSOR_THEME\") hl.env(\"XCURSOR_SIZE\", \"24\") hl.env(\"GDK_SCALE\", \"1\") hl.env(\"GDK_DPI_SCALE\", \"1\")" 2>/dev/null
+# dbus-update-activation-environment --systemd HYPRCURSOR_THEME="$CURSOR_THEME" HYPRCURSOR_SIZE="24" XCURSOR_THEME="$CURSOR_THEME" XCURSOR_SIZE="24" GDK_SCALE=1 GDK_DPI_SCALE=1 2>/dev/null
+# dconf write /org/gnome/desktop/interface/cursor-size 24 2>/dev/null
+# 
+# if command -v xrdb &> /dev/null; then
+#   printf "Xcursor.size: 24\nXcursor.theme: %s\n" "$CURSOR_THEME" | xrdb -merge 2>/dev/null
+# fi
+# 
+# for gtk_file in ~/.config/gtk-3.0/settings.ini ~/.config/gtk-4.0/settings.ini; do
+#   if [[ -f "$gtk_file" && -w "$gtk_file" && ! -L "$gtk_file" ]]; then
+#     if grep -q "gtk-cursor-theme-size" "$gtk_file"; then
+#       sed -i "s/gtk-cursor-theme-size=.*/gtk-cursor-theme-size=24/" "$gtk_file" 2>/dev/null
+#     else
+#       echo "gtk-cursor-theme-size=24" >> "$gtk_file" 2>/dev/null
+#     fi
+#   fi
+# done
 
 # 2.5 Save scale factor for application wrappers
 mkdir -p ~/.config
