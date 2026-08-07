@@ -100,6 +100,10 @@ CURSOR_THEME="catppuccin-mocha-light-cursors"
 hyprctl setcursor "$CURSOR_THEME" "$CURSOR_SIZE" 2>/dev/null
 dbus-update-activation-environment --systemd HYPRCURSOR_THEME="$CURSOR_THEME" HYPRCURSOR_SIZE="$CURSOR_SIZE" XCURSOR_THEME="$CURSOR_THEME" XCURSOR_SIZE="$CURSOR_SIZE" 2>/dev/null
 
+# 2.5 Save scale factor for application wrappers
+mkdir -p ~/.config
+echo "$SCALE" > ~/.config/ui_scale
+
 # 3. Restart Noctalia Shell
 pkill -f quickshell 2>/dev/null
 pkill -f noctalia-shell 2>/dev/null
