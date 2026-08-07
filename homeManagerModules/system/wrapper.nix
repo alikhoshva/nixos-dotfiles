@@ -22,6 +22,5 @@ in
     antigravity-ide =
       mkScaledApp "Google Antigravity IDE" "antigravity-ide" "antigravity-ide"
         "Development";
-    ftb-app = mkScaledApp "FTB App" "ftb-app" "ftb-app" "Game";
   };
 }
