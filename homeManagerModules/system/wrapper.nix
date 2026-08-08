@@ -16,7 +16,9 @@ in
 
   xdg.desktopEntries = {
     vivaldi-stable = mkScaledApp "Vivaldi" "vivaldi" "vivaldi" "Network";
-    vesktop = mkScaledApp "Vesktop" "vesktop" "vesktop" "Network";
+    vesktop = (mkScaledApp "Vesktop" "vesktop" "vesktop" "Network") // {
+      exec = "env NIXOS_OZONE_WL=1 ${scale-wrap}/bin/scale-wrap vesktop %U";
+    };
     spotify = mkScaledApp "Spotify" "spotify" "spotify-client" "Audio";
     code = mkScaledApp "Visual Studio Code" "code" "vscode" "Development";
     antigravity-ide =
