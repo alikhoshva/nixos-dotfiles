@@ -35,4 +35,11 @@
     package = pkgs.catppuccin-cursors.mochaLight;
     size = 24;
   };
+
+  home.sessionVariables = {
+    XCURSOR_SIZE = "24";
+    HYPRCURSOR_SIZE = "24";
+    XCURSOR_THEME = "catppuccin-mocha-light-cursors";
+    HYPRCURSOR_THEME = "catppuccin-mocha-light-cursors";
+  };
 }

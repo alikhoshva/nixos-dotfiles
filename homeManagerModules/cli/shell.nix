@@ -14,6 +14,9 @@
     STARSHIP_CONFIG = lib.mkForce "${config.xdg.configHome}/starship/starship.toml";
   };
 
+  systemd.user.sessionVariables = config.home.sessionVariables;
+
+
   home.sessionPath = [ "$HOME/.local/bin" ];
 
   programs.bash = {
