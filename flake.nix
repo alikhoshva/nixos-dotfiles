@@ -23,7 +23,6 @@
     nvim-config = {
       url = "github:alikhoshva/nvim-config";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.tree-sitter.inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     elephant = {
       url = "github:abenz1267/elephant";
