@@ -1,6 +1,6 @@
 # NixOS & Home Manager Architecture Guide
 
-This document serves as institutional memory for the system layout, module hierarchy, and design philosophy of `nixos-dotfiles`.
+This document serves as institutional memory for the system layout, module hierarchy, CI/CD pipeline, and design philosophy of `nixos-dotfiles`.
 
 ---
 
@@ -30,10 +30,10 @@ This repository uses **`inputs.import-tree`** to dynamically and recursively dis
 
 Loaded automatically via `(inputs.import-tree ./nixosModules)`:
 
-- `core/`: Core OS settings (locale, timezone, user accounts, system-wide packages, security policies, Home Manager integration).
+- `core/`: Core OS settings (locale, timezone, user accounts, system-wide packages, security policies, Lix, personal Cachix substituter).
 - `hardware/`: Physical hardware configs (bootloader, kernel modules, audio/pipewire, bluetooth, power management/TLP).
-- `services/`: Background daemons & system services (networking, display managers/greeter, virtualization, printing).
-- `programs/`: System-level GUI and gaming applications requiring root capabilities or system-wide wrappers (e.g., Hyprland system integration).
+- `services/`: Background daemons & system services (networking, portals, syncthing, virtualization, printing).
+- `programs/`: System-level GUI and gaming applications requiring root capabilities or system-wide wrappers (e.g., Hyprland system integration, Noctalia).
 
 ---
 
@@ -41,14 +41,25 @@ Loaded automatically via `(inputs.import-tree ./nixosModules)`:
 
 Loaded automatically via `(inputs.import-tree ../../homeManagerModules)` inside `nixosModules/core/home-manager.nix`:
 
-- `cli/`: Shell configurations (zsh, bash, starship), git, ssh, tmux, and CLI developer tools.
-- `desktop/`: Hyprland compositing, Waybar, Noctalia, wallpaper daemon, notification daemons, app launchers (Walker, Wofi), and symlink manager (`symlinks.nix`).
-- `programs/`: User-space GUI applications (browsers like Zen/Brave, text editors like Neovim, media players like mpv, yazi file manager).
-- `system/`: User system libraries, unstable channel overlays, and manual home environment settings.
+- `cli/`: Shell configurations (bash aliases, starship, nh), git, ssh, fzf, and CLI developer tools.
+- `desktop/`: Hyprland compositing, Waybar, Noctalia, wallpaper daemon, notification daemons, app launchers (Walker), and symlinks.
+- `programs/`: User-space GUI applications (Zen Browser, VS Code, Spicetify, GUI tools).
+- `system/`: User system libraries, latest packages (`pkgs.unstable`), and wrapper scripts.
 
 ---
 
-## 4. Module Conventions
+## 4. CI/CD & Personal Binary Caching Architecture
 
-1. **File-based Splitting**: Split configurations into dedicated files (e.g. `nixosModules/hardware/audio.nix`). No manual registration in `imports = [ ... ]` is needed thanks to `import-tree`.
-2. **Self-Contained Bundling**: Keep daemon settings, systemd service overrides, and required packages together in the same module file.
+To prevent supply-chain vulnerabilities from 3rd-party binary caches while avoiding long local compilations:
+
+1. **Personal Cache (`aleks-nixos-cache.cachix.org`)**:
+   - Only `cache.nixos.org` and `aleks-nixos-cache.cachix.org` are trusted in `nixosModules/services/cachix/aleks-nixos-cache.nix`.
+2. **GitHub Actions Workflow**:
+   - `.github/workflows/auto-update.yml`: Runs exclusively on a weekly schedule (Sunday 04:00 UTC) or manual dispatch. It updates `flake.lock`, builds toplevel, pushes binaries to `aleks-nixos-cache`, and commits verified lockfiles to the `dev` branch. Does NOT trigger on regular local git pushes.
+3. **Branching Model**:
+   - `main`: Stable, curated base.
+   - `dev`: Weekly rolling updates.
+4. **Shell Aliases (`homeManagerModules/cli/shell.nix`)**:
+   - `up`: `git -C ~/nixos-dotfiles pull && nh os switch`
+   - `up-dev`: `git -C ~/nixos-dotfiles checkout dev && git -C ~/nixos-dotfiles pull && nh os switch`
+   - `up-main`: `git -C ~/nixos-dotfiles checkout main && git -C ~/nixos-dotfiles pull && nh os switch`

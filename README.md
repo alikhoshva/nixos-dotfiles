@@ -1,6 +1,8 @@
 # NixOS & Home Manager Configuration
 
-A clean, modular NixOS and Home Manager configuration built from scratch using Nix Flakes and managed via the `nh` (Nix Helper) CLI tool.
+A clean, modular NixOS and Home Manager configuration built from scratch using Nix Flakes, Lix, and managed via the `nh` (Nix Helper) CLI tool.
+
+---
 
 ## Repository Structure
 
@@ -8,49 +10,79 @@ The configuration is split into distinct logical boundaries to keep things modul
 
 ```
 nixos-dotfiles/
-├── host/
+├── .github/workflows/            # CI/CD: Automated builds & weekly scheduled updates
+│   └── auto-update.yml           # Scheduled weekly updater pushing to dev branch & Cachix
+│
+├── host/                         # Minimal entrypoints
 │   ├── configuration.nix         # Minimal NixOS system profile entrypoint
 │   ├── hardware-configuration.nix # Auto-generated hardware scan results
 │   └── home.nix                  # Minimal Home Manager user profile entrypoint
 │
-├── nixosModules/                 # System-wide NixOS configurations
-│   ├── default.nix               # Combines and imports all system categories
-│   ├── core/                     # Core system settings (locale, users, core packages, security)
-│   ├── hardware/                 # Hardware configurations (boot, audio, bluetooth, power management)
-│   ├── services/                 # Background system services (networking, virtualization, printing)
+├── nixosModules/                 # System-wide NixOS configurations (via inputs.import-tree)
+│   ├── core/                     # Core settings (locale, users, security, Lix, Cachix)
+│   ├── hardware/                 # Hardware configurations (boot, audio, bluetooth, power)
+│   ├── services/                 # Background system services (networking, portals, syncthing)
 │   └── programs/                 # System-level GUI & gaming applications
 │
-├── homeManagerModules/           # User-space configurations (Home Manager)
-│   ├── default.nix               # Combines and imports all user categories
-│   ├── cli/                      # CLI tools, shells, git/ssh configs, and developer helpers
-│   ├── desktop/                  # Desktop environment styling, themes, app launchers, and symlinks
-│   ├── programs/                 # User GUI applications (browsers, editors, media players)
-│   └── system/                   # User system libraries, unstable packages, and manual settings
+├── homeManagerModules/           # User-space configurations (via inputs.import-tree)
+│   ├── cli/                      # CLI tools, bash aliases, nh, fzf, languages
+│   ├── desktop/                  # Hyprland, Waybar, Noctalia, Walker, styling
+│   ├── programs/                 # User GUI applications (Zen, VS Code, Spicetify, GUI tools)
+│   └── system/                   # User system libraries, latest packages, wrappers
 │
-└── config/                       # Raw dotfiles (linked via Home Manager symlinks)
-    ├── kitty/, waybar/, wofi/, hypr/, yazi/, starship/, etc.
+├── config/                       # Raw dotfiles (linked via out-of-store symlinks)
+│   ├── kitty/, waybar/, hypr/, yazi/, starship/, walker/, etc.
+│
+└── .agents/                      # AI Agent guidelines, architecture memory, skills & scripts
 ```
 
 ---
 
-## How to Apply Changes
+## Daily Workflow & Shell Aliases
 
-System and Home Manager configurations are fully unified into a single NixOS flake output (`nixosConfigurations.nixos`). All changes (both system-wide and user-space dotfiles/apps) are built and applied together using `nh`.
+Convenient shell aliases are configured in `homeManagerModules/cli/shell.nix`:
 
-### Rebuilding the Unified Configuration
-To build and apply all system and Home Manager settings in one command:
+| Command | Action |
+| :--- | :--- |
+| **`up`** | Pull current branch updates and apply switch instantly via Cachix (`nh os switch`) |
+| **`up-dev`** | Switch to the automated `dev` branch, pull weekly pre-built updates, and switch |
+| **`up-main`** | Switch back to the stable `main` branch and apply |
+
+---
+
+## Dual-Branch GitOps Architecture
+
+To ensure your desktop remains 100% stable while staying up-to-date with cutting-edge rolling packages:
+
+* **`main` Branch (Stable Base)**:
+  * Manually curated and protected from direct automated changes.
+  * Always known-good and rock-solid.
+* **`dev` Branch (Automated Rolling Updates)**:
+  * Every Sunday at 04:00 UTC (Midnight EDT), GitHub Actions runs `nix flake update`, verifies the build, pushes pre-compiled packages to `aleks-nixos-cache.cachix.org`, and pushes the verified `flake.lock` to `dev`.
+  * If upstream packages fail to build, CI aborts and leaves both branches untouched.
+
+### Promoting Dev to Main
+Once you have tested `dev` and confirmed everything works smoothly:
 ```bash
-nh os switch
+git checkout main
+git merge dev
+git push
 ```
-*Behind the scenes, `nixosModules/core/home-manager.nix` integrates Home Manager directly into the `nixos` system evaluation.*
 
 ---
 
-## Development & Testing (Safely checking your changes)
+## Binary Caching & Security
 
-Always verify your configuration compiles correctly before applying it:
+* **Zero 3rd-Party Substituters**: To prevent binary cache poisoning / supply-chain vulnerabilities, the system trusts only official `cache.nixos.org` and your personal `aleks-nixos-cache.cachix.org`.
+* **CI Cloud Builder**: Heavy compilation (e.g. Zen Browser, Walker, Electron apps, Tree-sitter parsers) is offloaded to GitHub Actions CI and signed with your personal token. Local machine rebuilds download binary artifacts in seconds.
 
-1. **Flake syntax and type check**:
+---
+
+## Development & Testing
+
+Always verify your configuration compiles cleanly before applying:
+
+1. **Syntax and type check**:
    ```bash
    nix flake check
    ```
@@ -59,7 +91,8 @@ Always verify your configuration compiles correctly before applying it:
    ```bash
    nh os switch --dry
    ```
-   *This evaluates both NixOS and Home Manager configurations to verify there are no syntax or type errors.*
 
-3. **Branch workflow**:
-   Make complex refactors or additions on a separate Git branch first. Only merge to `main` when the dry-run succeeds!
+3. **Run AI Agent Verification Script**:
+   ```bash
+   .agents/scripts/verify.sh
+   ```

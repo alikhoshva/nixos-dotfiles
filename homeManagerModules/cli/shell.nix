@@ -24,6 +24,9 @@
       vim = "nvim";
       sv = "sudo nvim";
       di = "devenv-init";
+      up = "git -C ~/nixos-dotfiles pull && nh os switch";
+      up-dev = "git -C ~/nixos-dotfiles checkout dev && git -C ~/nixos-dotfiles pull && nh os switch";
+      up-main = "git -C ~/nixos-dotfiles checkout main && git -C ~/nixos-dotfiles pull && nh os switch";
     };
     initExtra = ''
             function y() {

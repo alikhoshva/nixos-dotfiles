@@ -1,6 +1,6 @@
 # AI Coding Agent Guidelines (`.agents/AGENTS.md`)
 
-Welcome! This repository contains a clean, modular NixOS and Home Manager setup using Nix Flakes and the `nh` (Nix Helper) CLI.
+Welcome! This repository contains a clean, modular NixOS and Home Manager setup using Nix Flakes, Lix, and the `nh` (Nix Helper) CLI.
 
 ---
 
@@ -8,10 +8,11 @@ Welcome! This repository contains a clean, modular NixOS and Home Manager setup 
 
 ```
 nixos-dotfiles/
+├── .github/workflows/            # CI/CD: Automated builds, Cachix pushing & weekly updates
 ├── host/                         # Minimal entrypoints (configuration.nix, home.nix)
 ├── nixosModules/                 # System NixOS configurations (core, hardware, services, programs)
 ├── homeManagerModules/           # User space configurations (cli, desktop, programs, system)
-├── config/                       # Raw dotfiles (Hyprland, Waybar, Noctalia, Kitty, etc.)
+├── config/                       # Raw dotfiles (Hyprland, Waybar, Noctalia, Kitty, Walker, etc.)
 └── .agents/                      # Agent architecture (skills, knowledge, scripts, logs)
 ```
 *(For deep architecture & dotfile mappings, see [.agents/knowledge/nix-architecture.md](file:///.agents/knowledge/nix-architecture.md) and [.agents/knowledge/dotfiles-matrix.md](file:///.agents/knowledge/dotfiles-matrix.md)).*
@@ -25,6 +26,10 @@ nixos-dotfiles/
 3. **Self-Contained Bundling**: Keep related components (daemons, packages, dotfiles) bundled together within their dedicated module.
 4. **Git Staging Requirement**: Nix Flakes ignore untracked Git files. Always stage new files (`git add <file>`) before running Nix evaluation or build commands.
 5. **Zero Redundancy / Anti-Bloat**: Do not set Nix options to implicit defaults (`enable = false;`, `extraConfig = "";`, `settings = {};`). Do not list packages in `home.packages` if an active module already provides them.
+6. **Binary Cache & Security Standard**: Do not add arbitrary 3rd-party Cachix substituters into the system configuration due to cache poisoning risks. Offload builds to the GitHub Actions CI pipeline which signs and pushes binaries directly to `aleks-nixos-cache.cachix.org`.
+7. **GitOps Branching Protocol**:
+   - `main`: Curated stable base. Never push direct untested changes.
+   - `dev`: Automated weekly rolling updates populated by CI (`auto-update.yml`).
 
 ---
 

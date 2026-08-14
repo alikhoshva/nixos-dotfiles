@@ -1,0 +1,50 @@
+name: Scheduled Dev Flake Update & Cache
+
+on:
+  schedule:
+    # Runs every Sunday at 04:00 UTC
+    - cron: '0 4 * * 0'
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+permissions:
+  contents: write
+
+jobs:
+  update-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v30
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            warn-dirty = false
+
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v15
+        with:
+          name: aleks-nixos-cache
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      - name: Update Flake Inputs
+        run: nix flake update
+
+      - name: Check Flake Evaluation
+        run: nix flake check
+
+      - name: Build System Toplevel & Push to Cache
+        run: nix build .#nixosConfigurations.nixos.config.system.build.toplevel --accept-flake-config --show-trace
+
+      - name: Push to dev branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B dev
+          git commit -am "chore(flake): automated flake update for dev [skip ci]" || echo "No changes to commit"
+          git push --force origin dev
