@@ -2,7 +2,16 @@
 let
   scale-wrap = pkgs.writeShellScriptBin "scale-wrap" ''
     SCALE=$(cat "$HOME/.config/ui_scale" 2>/dev/null || echo 1.333333)
-    exec "$1" --force-device-scale-factor="$SCALE" "''${@:2}"
+    BIN="$1"
+    shift
+    ARGS=()
+    for arg in "$@"; do
+      case "$arg" in
+        %U|%u|%F|%f) ;;
+        *) ARGS+=("$arg") ;;
+      esac
+    done
+    exec "$BIN" --force-device-scale-factor="$SCALE" "''${ARGS[@]}"
   '';
 
   mkScaledApp = name: bin: icon: cat: {

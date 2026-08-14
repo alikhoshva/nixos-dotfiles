@@ -9,8 +9,6 @@
     QT_QPA_PLATFORMTHEME = "gtk3";
     QT_STYLE_OVERRIDE = "gtk3";
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    HYPRCURSOR_THEME = "catppuccin-mocha-light-cursors";
-    XCURSOR_THEME = "catppuccin-mocha-light-cursors";
     STARSHIP_CONFIG = lib.mkForce "${config.xdg.configHome}/starship/starship.toml";
   };
 
@@ -28,8 +26,6 @@
       di = "devenv-init";
     };
     initExtra = ''
-            export STARSHIP_CONFIG="${config.xdg.configHome}/starship/starship.toml"
-
             function y() {
               local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
               command yazi "$@" --cwd-file="$tmp"
