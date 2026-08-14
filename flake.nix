@@ -21,7 +21,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nvim-config = {
-      url = "path:/home/aleks/Projects/Personal/nvim-config";
+      url = "github:alikhoshva/nvim-config";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.tree-sitter.inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
