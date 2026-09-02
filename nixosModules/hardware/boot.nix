@@ -14,6 +14,9 @@
   boot.loader.grub.efiSupport = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Clean /tmp on boot
+  boot.tmp.cleanOnBoot = true;
+
   # AMD GPU & Kernel options.
   hardware.amdgpu.initrd.enable = true;
   boot.kernelParams = [
