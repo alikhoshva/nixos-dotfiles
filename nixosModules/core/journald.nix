@@ -5,5 +5,11 @@
     MaxRetentionSec=1month
   '';
 
-  systemd.coredump.enable = false;
+  systemd.coredump = {
+    enable = true;
+    settings.Coredump = {
+      Storage = "external";
+      MaxUse = "500M";
+    };
+  };
 }

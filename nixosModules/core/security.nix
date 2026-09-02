@@ -9,7 +9,6 @@
   security.pam.services = {
     greetd.enableGnomeKeyring = true;
     login.enableGnomeKeyring = true;
-    hyprlock.enableGnomeKeyring = true;
   };
 
   programs.seahorse.enable = true;
