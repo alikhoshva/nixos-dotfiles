@@ -10,7 +10,8 @@ This directory stores inactive, legacy, or superseded configurations, scripts, a
 archive/
 ├── README.md                     # This manifest and restoration guide
 ├── config/                       # Raw user dotfiles & desktop scripts
-│   ├── hypr/                     # Legacy Hyprland .conf files (superseded by Lua configs)
+│   ├── hypr/                     # Legacy Hyprland .conf & hyprlock files
+│   ├── noctalia/                 # Legacy Noctalia v4 settings.json
 │   ├── scripts/                  # Deprecated / inactive desktop scripts
 │   ├── waybar/                   # Legacy Waybar configuration (superseded by Noctalia)
 │   └── wlogout/                  # Legacy Wlogout layout/style (superseded by Noctalia)
@@ -36,6 +37,8 @@ archive/
 | `archive/config/scripts/start-rstudio.sh` | `config/scripts/start-rstudio.sh` | Unreferenced Docker RStudio container starter | 2026-07-31 |
 | `archive/config/scripts/stop-rstudio.sh` | `config/scripts/stop-rstudio.sh` | Unreferenced Docker RStudio container stopper | 2026-07-31 |
 | `archive/config/hypr/` | `config/hypr/*.conf` | Hyprland configuration migrated to Lua format | 2026-07-31 |
+| `archive/config/hypr/hyprlock.conf` | `config/hypr/hyprlock.conf` | Superseded by Noctalia v5 native lock screen | 2026-09-06 |
+| `archive/config/noctalia/settings.json` | `config/noctalia/settings.json` | Legacy Noctalia v4 JSON settings superseded by Noctalia v5 TOML | 2026-09-06 |
 | `archive/homeManagerModules/anyrun.nix` | `homeManagerModules/desktop/anyrun.nix` | Superseded by Walker launcher | 2026-07-31 |
 | `archive/homeManagerModules/neovim.nix` | `homeManagerModules/programs/neovim.nix` | Unused Neovim HM module | 2026-07-31 |
 

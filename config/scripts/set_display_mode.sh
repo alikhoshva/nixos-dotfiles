@@ -100,7 +100,6 @@ mkdir -p ~/.config
 echo "$SCALE" > ~/.config/ui_scale
 
 # 3. Restart Noctalia Shell
-pkill -f quickshell 2>/dev/null
-pkill -f noctalia-shell 2>/dev/null
+pkill -x noctalia 2>/dev/null
 sleep 0.5
-noctalia-shell &> /dev/null & disown
+noctalia &> /dev/null & disown

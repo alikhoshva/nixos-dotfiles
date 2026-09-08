@@ -16,10 +16,6 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    noctalia = {
-      url = "github:noctalia-dev/noctalia/legacy-v4";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
     nvim-config = {
       url = "github:alikhoshva/nvim-config";
       inputs.nixpkgs.follows = "nixpkgs-unstable";

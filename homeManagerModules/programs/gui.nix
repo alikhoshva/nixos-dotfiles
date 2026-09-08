@@ -3,7 +3,6 @@
 {
   home.packages = with pkgs; [
     # Shell & Session
-    hyprlock
     hypridle
     hyprpolkitagent
     networkmanagerapplet
