@@ -16,7 +16,6 @@
     cloud-utils
     #librewolf
     vesktop
-    zoom-us
     filezilla
     qdirstat
     obsidian

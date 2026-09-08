@@ -11,7 +11,6 @@
         hash = "sha256-rRQESi0Skoyf1jy/dRRK6ooKRPQhkak107kk5ulwZYI=";
       };
     }))
-    dbeaver-bin
     devcontainer
     (yazi.override { _7zz = pkgs._7zz-rar; })
     #antigravity-fhs
