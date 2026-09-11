@@ -22,12 +22,18 @@ jobs:
           ref: main
           fetch-depth: 0
 
+      - name: Configure curl & SSL for builders
+        run: |
+          echo 'user-agent = "Mozilla/5.0 (compatible; Nixpkgs/Nix; +https://nixos.org)"' | sudo tee -a /etc/curlrc
+          echo 'user-agent = "Mozilla/5.0 (compatible; Nixpkgs/Nix; +https://nixos.org)"' >> ~/.curlrc
+
       - name: Install Nix
         uses: cachix/install-nix-action@v30
         with:
           extra_nix_config: |
             experimental-features = nix-command flakes
             warn-dirty = false
+            sandbox = false
             ssl-cert-file = /etc/ssl/certs/ca-certificates.crt
 
       - name: Setup Cachix
