@@ -12,6 +12,9 @@ permissions:
 jobs:
   update-dev:
     runs-on: ubuntu-latest
+    env:
+      SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
+      NIX_SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -25,6 +28,7 @@ jobs:
           extra_nix_config: |
             experimental-features = nix-command flakes
             warn-dirty = false
+            ssl-cert-file = /etc/ssl/certs/ca-certificates.crt
 
       - name: Setup Cachix
         uses: cachix/cachix-action@v15
