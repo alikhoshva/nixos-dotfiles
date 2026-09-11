@@ -149,22 +149,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1770562336,
-        "narHash": "sha256-ub1gpAONMFsT/GU2hV6ZWJjur8rJ6kKxdm9IlCT0j84=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nvim-config": {
       "inputs": {
         "nixpkgs": [
@@ -174,15 +158,14 @@
         "plugins-lzextras": "plugins-lzextras",
         "plugins-plenary": "plugins-plenary",
         "plugins-yazi": "plugins-yazi",
-        "tree-sitter": "tree-sitter",
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1779994404,
-        "narHash": "sha256-HkrmiRf/3jV3sNgmoDbpPSO2jRMaUxKI2Q3AWFEvRAM=",
+        "lastModified": 1789147779,
+        "narHash": "sha256-5z+4gb1OgV+CtbyrvhsjbaGyQo13C6NaqNzMU9Zgk8k=",
         "owner": "alikhoshva",
         "repo": "nvim-config",
-        "rev": "a9a2b3eb094fe0f23972fd9ed010fd632e881554",
+        "rev": "c8695c9441c46d8724fe910bdb2bc1f36c1b8fdc",
         "type": "github"
       },
       "original": {
@@ -347,24 +330,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default-linux",
-        "type": "github"
-      }
-    },
-    "tree-sitter": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_2"
-      },
-      "locked": {
-        "lastModified": 1775549418,
-        "narHash": "sha256-HmHBvmdkwIoS84qDhbmqMA46NWC+yb3rjn86hnxGjn8=",
-        "owner": "tree-sitter",
-        "repo": "tree-sitter",
-        "rev": "b018c2001870e9a236dcc53afafcdd600685fdee",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tree-sitter",
-        "repo": "tree-sitter",
         "type": "github"
       }
     },
