@@ -20,15 +20,6 @@
       url = "github:alikhoshva/nvim-config";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    elephant = {
-      url = "github:abenz1267/elephant";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-    walker = {
-      url = "github:abenz1267/walker";
-      inputs.elephant.follows = "elephant";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
     antigravity-nix = {
       url = "github:jacopone/antigravity-nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
