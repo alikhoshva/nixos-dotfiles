@@ -42,3 +42,8 @@ hl.device({
     name        = "razer-razer-deathadder-v2-1",
     sensitivity = -1,
 })
+
+hl.device({
+    name        = "compx-mad-8k-dongle-1",
+    sensitivity = -1,
+})

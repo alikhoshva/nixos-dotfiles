@@ -28,6 +28,13 @@
         temurin-bin-21
         temurin-bin-25
       ];
+      additionalLibs = [
+        wayland
+        libdecor
+        libxkbcommon
+        vulkan-loader
+        libGL
+      ];
     })
     ftb-app
     # Desktop Utilities

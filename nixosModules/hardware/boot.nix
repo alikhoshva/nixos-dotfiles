@@ -23,6 +23,7 @@
     "zswap.enabled=1"
     "amdgpu.gpu_recovery=1"
     "amdgpu.abmlevel=0"
+    "amdgpu.dcdebugmask=0x10"
   ];
 
   # Swap file configuration.
