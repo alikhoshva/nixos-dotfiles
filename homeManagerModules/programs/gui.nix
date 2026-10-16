@@ -37,7 +37,7 @@
       ];
     })
     ftb-app
-    unstable.opencode
+    opencode
     # Desktop Utilities
     xrdb
     grim
