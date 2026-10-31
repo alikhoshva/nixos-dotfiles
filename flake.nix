@@ -25,6 +25,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     import-tree.url = "github:denful/import-tree";
+    sidra.url = "github:wimpysworld/sidra";
   };
 
   outputs =

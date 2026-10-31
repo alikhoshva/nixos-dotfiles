@@ -12,13 +12,14 @@
     }
   '';
   boot.loader.grub.efiSupport = true;
+  boot.loader.grub.configurationLimit = 5;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Clean /tmp on boot
   boot.tmp.cleanOnBoot = true;
 
   # AMD GPU & Kernel options.
-  hardware.amdgpu.initrd.enable = true;
+  # hardware.amdgpu.initrd.enable = true;
   boot.kernelParams = [
     "zswap.enabled=1"
     "amdgpu.gpu_recovery=1"

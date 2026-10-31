@@ -13,7 +13,8 @@ in
 
     # curd dependencies
     #pkgs.rofi
-    #pkgs.ueberzugpp
+    #pkgs.ueberzug
+    sidra.packages.${system}.default
   ];
 
 }
